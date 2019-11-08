@@ -1,0 +1,56 @@
+{% extends 'layout_login.html' %}
+{% block content %}
+<div id="content" class="position-absolute">
+        <div class="mt-5 text-right d-block">
+         <img src="../static/images/meal-icon.png" width="65" height="" class="d-inline-block align-center" alt="">
+        <span class="align-middle border-left pl-2" id='nav-title-1'>ALMYNAK</span><span class="align-text-top" id='nav-title-2'></span>
+        </div>
+
+        <div class="mt-2 text-center d-block">
+            <small class="text-muted">Log In</small>
+            <br>
+            <br>
+            <form class='login' action="" method="post">
+                {{ form.hidden_tag() }}
+                <div class='form-field'>
+                    {{ form.username(placeholder=" Username") }}
+                    {% for error in form.username.errors %}
+                        <div class="validation-error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class='form-field'>
+                    {{ form.password(placeholder=" Password") }}
+                    {% for error in form.password.errors %}
+                        <div class="validation-error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <br>
+                <small class='form-field-submit'>
+                    <div class=''>
+                        {{ form.remember_me() }}
+                        {{ form.remember_me.label }}
+                    </div>
+                    <br>
+                    <div class='form-field-submit'>
+                        {{ form.submit(id='login-submit', value="Login", class='btn btn-outline-info') }}
+                    </div>
+                    <div class='clear'></div>
+                </small>
+            </form>
+            <small>
+                New to EATcu? <a class="text-info" href='{{ url_for("register") }}'>Sign Up</a>
+            </small>
+        </div>
+        <footer class="m-4 mt-5 text-center fixed-bottom">
+            <small>&copy Almynak 2019</small>
+        </footer>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'login.js') }}"></script>
+
+{% endblock %}
