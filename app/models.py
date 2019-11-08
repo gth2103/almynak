@@ -22,4 +22,4 @@ def load_user(user_id):
     def __repr__(self):
         return '<User %r>' % self.username
 
- db.create_all()
+db.create_all()

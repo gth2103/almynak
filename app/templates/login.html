@@ -1,9 +1,8 @@
-{% extends 'layout_login.html' %}
+{% extends 'base_login_register.html' %}
 {% block content %}
 <div id="content" class="position-absolute">
-        <div class="mt-5 text-right d-block">
-         <img src="../static/images/meal-icon.png" width="65" height="" class="d-inline-block align-center" alt="">
-        <span class="align-middle border-left pl-2" id='nav-title-1'>ALMYNAK</span><span class="align-text-top" id='nav-title-2'></span>
+        <div class="mt-5 text-center d-block">
+        <span class="align-middle pl-2 text-info" id='nav-title-1'>ALMYNAK</span>
         </div>
 
         <div class="mt-2 text-center d-block">
@@ -39,7 +38,7 @@
                 </small>
             </form>
             <small>
-                New to EATcu? <a class="text-info" href='{{ url_for("register") }}'>Sign Up</a>
+                New to Almynak? <a class="text-info" href='{{ url_for("register") }}'>Sign Up</a>
             </small>
         </div>
         <footer class="m-4 mt-5 text-center fixed-bottom">

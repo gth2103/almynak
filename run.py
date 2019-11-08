@@ -7,11 +7,11 @@ grant =  User(username='grant', email='grant@columbia.edu', password_hash=genera
 john =  User(username='john', email='john@columbia.edu', password_hash=generate_password_hash('john'))
 jane =  User(username='jane', email='jane@columbia.edu', password_hash=generate_password_hash('jane'))
 
-db.session.add(guest)
-db.session.add(grant)
-db.session.add(john)
-db.session.add(jane)
-db.session.commit()
+#db.session.add(guest)
+#db.session.add(grant)
+#db.session.add(john)
+#db.session.add(jane)
+#db.session.commit()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug = True)
