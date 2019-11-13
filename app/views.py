@@ -45,5 +45,9 @@ def register():
 def home():
 	return render_template('home.html')
 
+@app.route('/about', methods=['GET', 'POST'])
+def about():
+	return render_template('about.html')
+
 if __name__ == '__main__':
     app.run(debug = True)

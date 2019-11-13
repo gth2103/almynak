@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+            <div class="row">
+                <div id="img-about" class="col pl-0 position-relative text-white text-center align-text-top">
+                    <div class="p-4 position-fixed banner-img-about">
+                        Calendar
+                        <hr class="banner_img_hr position-fixed border border-white mt-2">
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="lift content position-relative row bg-white text-center">
+                <div class="col">
+                    <div class="row">
+                        <div class="col section text-center pt-5">
+                            November 2019
+                            <hr class="section_hr border mt-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+        <script type="text/javascript" src="{{ url_for('static', filename='calendar.js') }}"></script>
+
+
+{% endblock %}

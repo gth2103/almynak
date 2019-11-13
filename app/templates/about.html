@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block content %}
+
+            <div class="row">
+                <div id="img-about" class="col pl-0 position-relative text-white text-center align-text-top">
+                    <div class="p-4 position-fixed banner-img-about">
+                        About us
+                        <hr class="banner_img_hr position-fixed border border-white mt-2">
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="lift content position-relative row bg-white text-center">
+                <div class="col">
+                    <div class="row">
+                        <div class="col section text-center pt-5">
+                            MISSION
+                            <hr class="section_hr border mt-4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col section-mission text-center pt-4">
+                            <p class="mission_p d-inline-block">
+                                Id eam errem facilisis dissentias, cu vel nisl enim invenire. Fabulas democritum instructior vel ne. Duis voluptaria argumentum no sed, nec clita eruditi consulatu cu. Exerci cotidieque accommodare ea vis, id invenire suscipiantur ius. Ea iriure sensibus nec, pro iusto luptatum sadipscing no, simul clita interesset vix ea.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col section text-center pt-5">
+                            BOARD
+                            <hr class="section_hr border mt-4 ">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col section-board text-center">
+                            <ul id="board" class="px-5 px-5">
+                                <li class="p-4">
+                                    <div id="1" class="board-member d-inline-block text-center p-5 mx-5">
+                                        Jane Doe
+                                        <br>
+                                        Co-Founder and CEO
+                                        <br>
+                                        <img class="board-member-img p-2" src="/static/images/board_1.jpeg">
+                                        <br>
+                                        <button type="button" class="btn btn-light py-0" data-toggle="modal" data-target="#exampleModal" data-name="Jane Doe" data-title="Co-Founder and CEO"> 
+                                            <small> 
+                                                More
+                                            </small>
+                                        </button>
+                                    </div> 
+                                </li>
+                                <li class="p-4">
+                                    <div id="2" class="board-member d-inline-block text-center p-5 mx-5">
+                                        Rebecca Good
+                                        <br>
+                                        Co-Founder and CEO
+                                        <br>
+                                        <img class="board-member-img p-2" src="/static/images/board_1.jpeg">
+                                        <br>
+                                        <button type="button" class="btn btn-light py-0" data-toggle="modal" data-target="#exampleModal" data-name="Rebecca Good" data-title="Co-Founder and CEO"> 
+                                            <small> 
+                                                More
+                                            </small>
+                                        </button>
+                                    </div> 
+                                </li>
+                                <li class="p-4">
+                                    <div id="2" class="board-member d-inline-block text-center p-5 mx-5">
+                                        John Michael
+                                        <br>
+                                        COO
+                                        <br>
+                                        <img class="board-member-img p-2" src="/static/images/board_1.jpeg">
+                                        <br>
+                                        <button type="button" class="btn btn-light py-0" data-toggle="modal" data-target="#exampleModal" data-name="John Michael" data-title="COO"> 
+                                            <small> 
+                                                More
+                                            </small>
+                                        </button>
+                                    </div> 
+                                </li>
+                                <li class="p-4">
+                                    <div id="2" class="board-member d-inline-block text-center p-5 mx-5">
+                                        Shana Anthony
+                                        <br>
+                                        CFO
+                                        <br>
+                                        <img class="board-member-img p-2" src="/static/images/board_1.jpeg">
+                                        <br>
+                                        <button type="button" class="btn btn-light py-0" data-toggle="modal" data-target="#exampleModal" data-name="Shana Anthony" data-title="CFO">
+                                            <small> 
+                                                More
+                                            </small>
+                                        </button>
+                                    </div> 
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="exampleModalLabel">
+                            </h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">
+                                <small>
+                                    CONTACT
+                                </small>
+                            </button>
+                            <button type="button" class="btn btn-outline-primary">
+                                <small>
+                                    COFFEE CHAT
+                                </small>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+        <script type="text/javascript" src="{{ url_for('static', filename='about.js') }}"></script>
+
+
+{% endblock %}

@@ -28,10 +28,18 @@ a {
 }
 
 ul#menu li {
-  display:inline;
-  font-weight: bold;
-  font-size: 9pt;
+    display:inline;
+    font-size: 9pt;
+    list-style: none;
 }
+
+ul#board li {
+    display:inline;
+    font-weight: 675;
+    font-size: 9pt;
+    list-style: none;
+}
+
 #logo {
 
     height: 35px;
@@ -42,6 +50,20 @@ ul#menu li {
     opacity: 1;
     background-image: url("/static/images/home.jpeg");
     background-size: 190vh;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: top;
+    height: 120vh;
+    color: white;
+    font-size: 32px;
+    transform: scaleY(0.9) translateY(-5%);
+}
+
+#img-about {
+    margin-top: -20%;
+    opacity: 1;
+    background-image: url("/static/images/lowe.jpg");
+    background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: top;
@@ -63,21 +85,33 @@ ul#menu li {
     font-size: 64px;
 }
 
-.container-fluid { 
+.container-fluid {
+
     width: 100%;
 }
 
-.content {
+.base {
+
     transform: scale(1) !important;
     height: 50px;
     bottom: -250px;
 }
 
-.lift{
-    top: -10vh;
+.content {
+
+    transform: scale(1) !important;
+    min-height: 100vh;
+    bottom: -250px;
+}
+
+.lift {
+
+    top: -12vh;
+    z-index: 200;
 }
 
 .title {
+
   top: 0px; /* Stay on top */
   left: 0px;
   transition: top 0.3s; /* Transition effect when sliding down (and up) */
@@ -85,11 +119,40 @@ ul#menu li {
   z-index: 100;
 }
 
+.section {
+
+    height: 110px;
+    font-size: 80%;
+    font-weight: 700;
+}
+
+.section_hr {
+
+    width: 65px;
+    border-color: #d9dfe4;
+
+}
+
+.section-mission {
+
+    height: 150px;
+    font-size: 10pt;
+    font-weight: 500;
+    line-height: 10pt !important;
+}
+
+.mission_p {
+
+    width: 370px;
+}
+
 .inactive-title {
-  top: -65px;
+
+    top: -65px;
 }
 
 .banner-img {
+
     top: 45%;
     left: 50%;
     margin-left: -250px;
@@ -99,20 +162,43 @@ ul#menu li {
     line-height: 1.3;
 }
 
+.banner-img-about {
+
+    top: 85vh;
+    left: 50%;
+    margin-left: -250px;
+    font-family: helvetica;
+    transform: scaleY(1.1);
+    width: 500px;
+    line-height: 1.3;
+}
+
+.banner_img_hr {
+
+    left: 50%;
+    margin-left: -70px;
+    font-family: helvetica;
+    transform: scaleY(1.1);
+    width: 135px;
+    border-width: 2px;
+}
+
 .banner-tagline_img {
+
     font-size: 10pt;
     font-weight: 500;
     line-height: 10pt !important;
 }
 
-.top{
+.top {
+
     z-index: 300;
 }
 
 .up-arrow{
 
     height: 30px;
-    top: -12px;
+    top: 0px;
 }
 
 .social-media {
@@ -123,11 +209,137 @@ ul#menu li {
 .footer {
 
     font-size: 8pt;
-    font-weight: 50;
+    font-weight: 300;
+}
+
+.modal-content {
+
+    border: none;
+    border-radius: 0px;
+    width: 300px;
+    margin-left: 25%;
+}
+
+.modal-body {
+
+    font-size: 10pt;
+}
+
+.btn {
+
+    font-family: arial;
+}
+
+.btn-outline-primary {
+
+    color: #00a1fe;
+    border: none;
+    border-radius: 0px;
+}
+
+.btn-outline-primary:hover {
+
+    color: #00a1fe;
+    opacity: 0.8;
+    border: none;
+    border-radius: 0px;
+    background-color: #ffffff;
+}
+
+.board-member {
+
+    font-family: arial narrow;
 }
     
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 576px) {
 
-               
+    .banner-img-about {
+
+        top: 55vh;
+    }
+
+    #img-about {
+
+        height: 90vh;
+    } 
+}
+    
+
+@media screen and (min-width: 576px) {
+
+    .banner-img-about {
+
+        top: 60vh;
+    }
+
+    #img-about {
+
+        height: 95vh;
+    }          
+}
+
+@media screen and (min-width: 768px) {
+ 
+    .banner-img-about {
+
+        top: 65vh;
+    }
+
+    #img-about {
+
+        height: 100vh;
+    }            
+}
+
+@media screen and (min-width: 992px) {
+
+    .banner-img-about {
+
+        top: 75vh;
+    }
+
+    #img-about {
+
+        height: 110vh;
+    }                
+}
+
+@media screen and (min-width: 1200px) {
+
+    .banner-img-about {
+
+        top: 80vh;
+    }
+
+    #img-about {
+
+        height: 120vh;
+    }                
+}
+
+@media screen and (min-width: 2560px) {
+
+      .banner-img-about {
+
+        top: 120vh;
+    }
+
+    #img-about {
+
+        height: 140vh;
+    }               
+}
+
+@media screen and (min-width: 4096px) {
+
+     .banner-img-about {
+
+        top: 180vh;
+    }
+
+    #img-about {
+
+        height: 200vh;
+    }              
 }

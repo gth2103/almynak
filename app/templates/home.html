@@ -1,50 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>
-            Almynak | Home
-        </title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
-            crossorigin="anonymous">
+{% extends 'base.html' %}
+{% block content %}
 
-        <script  src="https://code.jquery.com/jquery-3.4.1.js"   
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="   
-            crossorigin="anonymous"> 
-        </script>
-
-        <script   src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-            crossorigin="anonymous">
-        </script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
-             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
-             crossorigin="anonymous">
-        </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
-             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
-             crossorigin="anonymous">
-        </script>
-
-        <link rel="stylesheet" href="/static/css/style.css">   
- 
-    </head>
-    <body class="bg-dark">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 pt-3 pb-3 pl-0 pr-4 title position-fixed">
-                    <a href="./home" class="pl-4 float-left">
-                        <img id="logo" src="/static/images/white_cubps_logo.png" alt="logo">
-                    </a>
-                    <ul id="menu" class="pl-3 pr-3 mr-0 text-white float-right">
-                        <li class="p-2">About Us</li>
-                        <li class="p-2">Members</li>
-                        <li class="p-2">Calendar</li>
-                        <li class="p-2">Contact</li>
-                    </ul>
-                </div>
-            </div>
             <div class="row">
                 <div id="img-home" class="col pl-0 position-relative text-white text-center align-text-top">
                     <p class="p-4 position-fixed banner-img">
@@ -58,28 +14,9 @@
                     </p>
                 </div>
             </div>
-            <div class="lift position-relative row bg-dark content text-center">
-                <div class="col">
-                    <div class='row'>
-                        <div class="col">
-                            <img class="up-arrow position-absolute mb-5" src="/static/images/up_arrow.png">
-                            <br>
-                            <a class="d-inline" href="#">
-                                <img class="social-media mt-5 ml-4" src="/static/images/facebook.png">
-                            </a>
-                            <a class="d-inline" href="#">
-                                <img class="social-media mt-5" src="/static/images/twitter.png">
-                            </a>
-                            <a class="d-inline" href="#">
-                                <img class="social-media mt-5" src="/static/images/instagram.png">
-                            </a>
-                            <div class="footer m-3 ml-4 text-center text-secondary">
-                                &copy; Almynak 2019. All Rights Reserved.
-                            </div>
-                        </di>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+            {% endblock %}
+
+{% block javascript %}
+
+
+{% endblock %}
