@@ -40,6 +40,19 @@ ul#board li {
     list-style: none;
 }
 
+input {
+
+    border-radius: 2px !important;
+    border-color: #afb0b8;
+}
+
+::placeholder {
+
+    font-size: 9pt;
+    padding: 4px;
+    color: #afb0b8 !important;
+}
+
 #logo {
 
     height: 35px;
@@ -83,6 +96,14 @@ ul#board li {
     
     font-weight: 20;
     font-size: 64px;
+}
+
+.label {
+
+    font-size: 10pt;
+    font-weight: 300;
+    color: #afb0b8;
+    line-height: 10pt;
 }
 
 .container-fluid {
@@ -139,6 +160,35 @@ ul#board li {
     font-size: 10pt;
     font-weight: 500;
     line-height: 10pt !important;
+}
+
+.section-calendar-header {
+
+    height: 90px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.section-calendar {
+
+    font-size: 80%;
+    font-weight: 300;
+}
+
+.section-contact-bar {
+
+    height: 80px;
+}
+
+.section-contact-header {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.section-contact-body {
+
+    font-size: 80%;
+    font-weight: 300;
 }
 
 .mission_p {

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block content %}
+
+            <div class="row">
+                <div id="img-about" class="col pl-0 position-relative text-white text-center align-text-top">
+                    <div class="p-4 position-fixed banner-img-about">
+                        Contact
+                        <hr class="banner_img_hr position-fixed border border-white mt-2">
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="lift content position-relative row bg-white">
+                <div class="col">
+                    <div class="row">
+                        <div class="col section-contact-bar bg-light p-4">
+                        </div>
+                    </div>
+                    <div class="row px-5 pt-4">
+                        <div class="col-sm-2 col-lg-3">
+                        </div>
+                        <div class="col-12 col-sm-8 col-lg-6 section-contact-header text-dark p-0 p-sm-3 p-lg-4">
+                            Contact
+                            <br>
+                            <span class="label d-inline">
+                                Eum te melius tacimates. Inani affert feugiat sit in.
+                            </span>
+                        </div>
+                        <div class="col-sm-2 col-lg-3">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-lg-3">
+                        </div>
+                        <div class="col-12 col-sm-8 col-lg-6 section-contact-body px-5 py-2">
+                            <form>
+                                <div class="form-row">
+                                    <label for="inputName" class="col p-2 text-dark">
+                                        Name: &#42;
+                                    </label>
+                                </div>
+                                <div class="form-row" id="inputName">
+                                    <div class="col p-2">
+                                        <input type="text" class="form-control" placeholder="First name" required>
+                                    </div>
+                                    <div class="col p-2">
+                                        <input type="text" class="form-control" placeholder="Last name" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <label for="inputEmail" class="col col-form-label pt-4 px-2 text-dark">
+                                        Email Address: &#42;
+                                    </label>
+                                </div>
+                                <div class="form-group form-row">
+                                    <div class="col p-2">
+                                        <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <label for="inputSubject" class="col col-form-label p-2 text-dark">
+                                        Subject:
+                                    </label>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col p-2">
+                                        <input type="text" class="form-control" placeholder="" id="inputSubject">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <label for="inputMessage" class="col col-form-label pt-4 px-2 text-dark">
+                                        Message: &#42;
+                                    </label>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col p-2">
+                                        <textarea class="form-control" id="inputMessage" rows="3" required></textarea>
+                                    </div>
+                                </div>
+                            </form>    
+                        </div>
+                        <div class="col-sm-2 col-lg-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+        <script type="text/javascript" src="{{ url_for('static', filename='calendar.js') }}"></script>
+
+
+{% endblock %}

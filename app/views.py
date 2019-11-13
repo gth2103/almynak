@@ -49,5 +49,17 @@ def home():
 def about():
 	return render_template('about.html')
 
+@app.route('/members', methods=['GET', 'POST'])
+def members():
+    return render_template('members.html')
+
+@app.route('/calendar', methods=['GET', 'POST'])
+def calendar():
+    return render_template('calendar.html')
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    return render_template('contact.html')
+
 if __name__ == '__main__':
     app.run(debug = True)
