@@ -1,17 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 
-            <div class="row">
-                <div id="img-home" class="col pl-0 position-relative text-white text-center align-text-top">
-                    <p class="p-4 position-fixed banner-img">
-                        Columbia University
-                        <br>
-                        Black Pre-Professional Society
-                        <br>
-                        <small class="banner-tagline_img">
-                            Lorem ipsum dolor sit amet, mei percipit mnesarchum te, albucius phaedrum.
-                        </small>
-                    </p>
+            <div class="row banner-row">
+                <div id="img-home" class="col pl-0 d-block text-white text-center align-text-top">
+                    <div class='row'>
+                        <div class="col p-4 position-fixed banner">
+                            <span class="banner-title">
+                                Columbia University
+                                <br>
+                                Black Pre-Professional Society
+                                <br>
+                            </span>
+                            <small class="banner-tagline mb-5">
+                                Lorem ipsum dolor sit amet, mei percipit mnesarchum te, albucius phaedrum.
+                            </small>
+                            <br>
+                            <button id="enter" onclick="window.location.href='/about'" class="btn btn-dark mt-5 px-4 py-3">
+                                Enter
+                            </button>
+                        </div>
+                    </div>                    
                 </div>
             </div>
             {% endblock %}

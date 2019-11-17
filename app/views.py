@@ -4,6 +4,7 @@ from app import app, db
 from app.models import *
 from app.forms import *
 from app.register import *
+from app.events import *
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
@@ -40,6 +41,10 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
+@app.route('/uplaod-image', methods=['GET', 'POST'])
+def upload_image():
+    return redirect(url_for('account'))
+
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
@@ -60,6 +65,10 @@ def calendar():
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     return render_template('contact.html')
+
+@app.route('/account', methods=['GET', 'POST'])
+def account():
+    return render_template('account.html')
 
 if __name__ == '__main__':
     app.run(debug = True)

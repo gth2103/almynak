@@ -14,10 +14,17 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(255), nullable=False)
+    comment = db.Column(db.String(255))
+    group = db.Column(db.String(255), nullable=False)
+    start_date = db.Column(db.Date, index=True, nullable=False)
+    end_date = db.Column(db.Date, nullable=False)
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
-
 
     def __repr__(self):
         return '<User %r>' % self.username

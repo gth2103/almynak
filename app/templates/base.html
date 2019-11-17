@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>
-            Almynak | Home
+            Almynak | Manage you social club on the web
         </title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
@@ -22,6 +22,7 @@
              integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
              crossorigin="anonymous">
         </script>
+
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
              integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
              crossorigin="anonymous">
@@ -31,13 +32,39 @@
  
     </head>
     <body class="bg-dark">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-12 pt-3 pb-3 pl-0 pr-4 title position-fixed">
-                    <a href="./home" class="pl-4 float-left">
+                    <a href="./home" class="pl-0 pl-sm-4 float-left">
                         <img id="logo" src="/static/images/white_cubps_logo.png" alt="logo">
                     </a>
-                    <ul id="menu" class="pl-3 pr-3 mr-0 text-white font-weight-bold float-right">
+                    {% if current_user.is_authenticated %}
+                    <ul class="d-inline p-0">
+                        <li class="nav-item dropdown d-inline">
+                            <a class="nav-link dropdown-toggle d-inline" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <form class="dropdown-form d-inline-block" action="/upload-image" method="POST" enctype="multiport/form-data">
+                                    <div class="form-group">
+                                        <label class="form-label pl-1">
+                                            Select&nbsp;Image:
+                                        </label>
+                                        <div class="custom-file d-block">
+                                            <input type="file" class="custom-file-input" name="image" id="image">
+                                            <label class="custom-file-label label pt-2" for="image">
+                                                Image...
+                                            </label>
+                                        </div>
+                                        <button id="upload" class="btn btn-light mt-2 float-right">
+                                            Uplaod
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                    {% endif %}
+                    <ul id="menu" class="pl-3 pr-3 mr-0 mt-3 text-white font-weight-bold text-uppercase float-right">
                         <li class="p-2">
                             <a href="/about">
                                 About Us
@@ -58,6 +85,18 @@
                                 Contact
                             </a>
                         </li>
+                        {% if current_user.is_authenticated %}
+                        <li class="p-2">
+                            <a href="/account">
+                                Account
+                            </a>
+                        </li>
+                        <li class="p-2">
+                            <a href="/logout">
+                                Logout
+                            </a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -66,22 +105,22 @@
 
             {% endblock %}
 
-            <div class="lift position-relative row bg-dark base text-center">
+            <div class="lift d-block row bg-dark base text-center">
                 <div class="col">
                     <div class='row'>
-                        <div class="col">
-                            <img class="up-arrow position-absolute mb-5" src="/static/images/up_arrow.png">
+                        <div class="col base-col d-block">
+                            <img class="up-arrow mb-5" src="/static/images/up_arrow.png">
                             <br>
                             <a class="d-inline" href="#">
-                                <img class="social-media mt-4 ml-4" src="/static/images/facebook.png">
+                                <img class="social-media my-2" src="/static/images/facebook.png">
                             </a>
                             <a class="d-inline" href="#">
-                                <img class="social-media mt-4" src="/static/images/twitter.png">
+                                <img class="social-media my-2" src="/static/images/twitter.png">
                             </a>
                             <a class="d-inline" href="#">
-                                <img class="social-media mt-4" src="/static/images/instagram.png">
+                                <img class="social-media my-2" src="/static/images/instagram.png">
                             </a>
-                            <div class="footer m-4 mr-0 pl-4 text-center text-secondary">
+                            <div class="footer mt-5 text-center text-secondary">
                                 &copy; Almynak 2019. All Rights Reserved.
                             </div>
                         </di>

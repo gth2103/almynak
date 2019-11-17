@@ -16,7 +16,7 @@ var modal_dynamic_select = function(){
   
 	var modal = $(this)
   
-	modal.find('.modal-title').html(recipient + '<br>' + roll)
+	modal.find('.modal-title').html('<span class="board-member font-weight-bold">' + recipient + '</span><br><span class="board-member-roll">' + roll + '</span>')
   	modal.find('.modal-body').html('<p>' + body + '</p>')
     })
 };
