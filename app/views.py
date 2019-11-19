@@ -1,10 +1,13 @@
+import os
 from flask import render_template, Response, request, jsonify, redirect, url_for, flash
 from flask_login import current_user, login_user, logout_user, login_required
+from werkzeug.utils  import secure_filename
 from app import app, db
 from app.models import *
 from app.forms import *
 from app.register import *
 from app.events import *
+from app.images import *
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
@@ -41,9 +44,43 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
-@app.route('/uplaod-image', methods=['GET', 'POST'])
-def upload_image():
-    return redirect(url_for('account'))
+@app.route('/upload-image/<file>', methods=['GET', 'POST'])
+def upload_image(file):
+
+    if request.method == "POST":
+
+        print(file)
+
+        if file not in request.files:
+
+            print("No file selected.")
+
+            return redirect(request.url)
+
+        image = request.files["brand-image"]
+
+        if image.filename == "":
+
+            print("Image must have a filename.")
+
+            return redirect(request.url)
+
+        if not allowed_images(image.filename):
+
+            print("Image filetype not allowed.")
+
+        else:
+
+            filename  = secure_filename(image.filename)
+
+
+        image.save(os.path.join(app.config['IMAGE_UPLOADS'], filename))
+
+        print("Image saved.")
+
+        return redirect(request.url)
+
+    return redirect(url_for('home'))
 
 
 @app.route('/home', methods=['GET', 'POST'])

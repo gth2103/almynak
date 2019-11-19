@@ -46,6 +46,12 @@ ul#board li {
     list-style: none;
 }
 
+ul.flashes {
+
+    width:350px;
+    z-index: 3000;
+}
+
 input {
 
     border-radius: 2px !important;
@@ -273,9 +279,10 @@ img {
     font-weight: 300;
 }
 
-.mission_p {
+.mission-p {
 
-    width: 370px;
+    width: 90%;
+    max-width: 700px;
 }
 
 .inactive-title {
