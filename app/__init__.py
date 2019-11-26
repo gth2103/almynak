@@ -13,7 +13,8 @@ SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 
 #Change depending on server
-app.config['IMAGE_UPLOADS'] = app.root_path + "/static/images"
+app.config['IMAGE_UPLOADS_FULL'] = app.root_path + "/static/images"
+app.config['IMAGE_UPLOADS_REL'] = "/static/images"
 app.config['ALLOWED_IMAGE_EXTENSIONS'] = ["PNG", "JPG", "JPEG", "GIF"]
 
 db = SQLAlchemy(app)

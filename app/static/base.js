@@ -1,3 +1,4 @@
+
 var show_selected_file = function(){
 
 	$('#brand-image').on('change', function(){
@@ -7,7 +8,6 @@ var show_selected_file = function(){
 		$(this).next('label').text(file);
 	})
 }
-
 
 $(document).ready(function(){
 

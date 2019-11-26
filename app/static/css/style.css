@@ -64,6 +64,11 @@ img {
 
 }
 
+table {
+
+    border-top-color: 5px solid #fff !important;;
+}
+
 ::placeholder {
 
     font-size: 9pt;
@@ -85,12 +90,58 @@ img {
     opacity: 0.9;
 }
 
+#commit-banner {
+    
+    border-radius: 0px;
+    font-family: Galvji;
+    line-height: 9px;
+    font-weight: 350;
+    opacity: 0.9;
+}
+
+
+#todayButton1 {
+
+    display: inline-block !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    border-radius: 0px !important;
+    font-family: Galvji !important;
+    line-height: 9px !important;
+    font-weight: 350 !important;
+    color: #535d67 !important;
+    background-color: #f8f9fa !important;
+    border-color: #f8f9fa !important;
+    border: 1px solid transparent !important;
+    padding: .375rem .75rem !important;
+    font-size: 1rem !important;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out !important;
+}
+
+
+#commit-tagline {
+    
+    border-radius: 0px;
+    font-family: Galvji;
+    line-height: 9px;
+    font-weight: 350;
+    opacity: 0.9;
+}
+
+
 #upload {
     
     border-radius: 0px;
     font-family: Galvji;
     font-size: 10pt;
     font-weight: 500;
+}
+
+#preview {
+    
+    border-radius: 0px;
+    font-family: Galvji;
+    font-size: 10pt;
 }
 
 #contact {
@@ -167,6 +218,15 @@ img {
     border: 0;
 }
 
+
+.bubble {
+
+    position: fixed !important;
+    margin-top: 48vh !important;
+    width: 320px  !important;
+
+}
+
 .form-label {
 
     font-size: 11pt;
@@ -214,6 +274,12 @@ img {
     top: -10.5vh;
 }
 
+.base-row {
+
+    width: 100%;
+}
+
+
 .title {
 
   top: 0px; /* Stay on top */
@@ -251,9 +317,10 @@ img {
 .section-calendar-header {
 
     height: 90px;
-    font-size: 20px;
     font-weight: 600;
     font-family: Galvji;
+    padding-left: 10em !important;
+    padding-right: 10em !important;
 }
 
 .section-calendar {
@@ -302,7 +369,6 @@ img {
 
 .banner-title {
 
-    line-height: 1.3pt;
 }
 
 .banner-about {
@@ -343,7 +409,6 @@ img {
 
     font-size: 12pt;
     font-weight: 500;
-    line-height: 9px !important;
     font-family: Galvji;
 }
 
@@ -361,6 +426,20 @@ img {
 .social-media {
 
     height: 50px;
+}
+
+.social-media-div {
+
+    max-width: 52px  !important;
+}
+
+.social-media-toggle::after {
+
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+    border-top: 0.6em solid !important;
+    border-right: 0.4em solid transparent !important;
+    border-left: 0.4em solid transparent !important;
 }
 
 .footer {
@@ -429,7 +508,161 @@ img {
     background-color: #e2e6ea;
     border-color: #dae0e5;
 }
+
+.view-cap {
+
+    background-color: #fff !important;
+
+}
+
+.view-container-border {
+
+    padding: 0 !important;
+}
+
+.mv-daynames-table {
+
+    background: #fff !important;
+    color: #6c757d !important;
+}
+
+.mv-dayname {
+
+    font-weight: 700 !important;
+    font-family: Galvji !important;
+    text-transform: uppercase !important;
+    font-size: 10pt !important;
+    padding: 0 !important;
+}
+
+.mv-event-container {
+
+    background: #f8f9fa !important;
+    border-top: 9.5px solid #fff !important;
+    border-bottom: 10px solid #fff !important;
+}
+
+
+.st-dtitle {
+
+    background: #f8f9fa !important;
+    color: #6c757d !important;
+    font-weight: 700 !important;
+    border-left: 5px solid #fff !important;
+    border-top: 5px solid #fff !important;
+}
+
+.st-dtitle-nonmonth {
+
+    background: #fff !important;
+    color: #c3ccd4 !important;
+    font-weight: 700 !important;
+}
+
+.st-bg {
+
+    border-left: 5px solid #fff !important;
+}
+
+.st-bg-today {
+
+    background: #e7eaee !important;
+    border-left: 5px solid #fff !important;
+    border-right: 5px solid #fff !important;
+}
+
+.st-dtitle-today {
+
+    background: #e7eaee !important;
+    border-top: 5px solid #fff !important;
+    border-bottom: none !important;
+}
+
+.st-c {
+
+    color: ;
+}
+
+
+.calendar-container{
+
+    padding: 0em 8em 8em 8em !important;
+}
+
+.ui-rtsr-unselected {
+
+    background-color: #fff !important;
+    color: #343a40 !important;
+}
+
+.ui-rtsr-last-tab {
+
+    margin-right: 2px !important;
+}
+
+.ui-rtsr-name {
+
+    font-weight: 500 !important;
+    font-size: 80% !important;
+    font-family: Galvji !important;
+
+}
+
+.tab-name {
     
+    font-weight: 500 !important;
+    font-size: 80% !important;
+    color: #343a40 !important;
+    margin-left: 2px !important;
+    font-family: Galvji !important;
+
+}
+
+.tg-col-today {
+
+    border-left: 1px solid #fff !important;
+}  
+
+.tg-today {
+    
+    background-color: #e7eaee !important;
+}
+
+.wk-weektop {
+
+    background-color: #f8f9fa !important;
+    color: #343a40 !important;
+}
+
+.wk-dayname {
+
+    color: #343a40 !important;
+    font-weight: 500 !important;
+    font-family: Galvji !important;
+}
+
+.wk-today {
+
+    background-color: #e7eaee !important;
+    color: #343a40 !important;
+    font-weight: 500! important;
+    border: 1px solid #d3d8e0 !important;
+
+}
+
+.tg-times-pri, .tg-times-sec {
+
+    background-color: #f8f9fa !important;
+    color: #343a40 !important;
+}
+
+.date-top {
+
+    font-size: 20pt !important;
+}
+
+
+
 
 @media screen and (max-width: 576px) {
 
@@ -442,11 +675,23 @@ img {
 
         height: 90vh;
     }
+
     .banner {
 
         left: 0%;
         margin-left: 0px;
-    } 
+    }
+
+    .calendar-container{
+
+        padding: 0em 0em 0em 0em !important;
+    }
+
+    .section-calendar-header {
+
+        padding-left: 1em !important;
+        padding-right: 1em !important;
+    }
 }
     
 
@@ -466,7 +711,18 @@ img {
 
         left: 0%;
         margin-left: 0px;
-    }        
+    } 
+
+    .calendar-container{
+
+        padding: 0em 2em 2em 2em !important;
+    } 
+
+    .section-calendar-header {
+
+        padding-left: 4em !important;
+        padding-right: 4em !important;
+    }      
 }
 
 @media screen and (min-width: 768px) {
@@ -485,7 +741,18 @@ img {
 
         left: 50%;
         margin-left: -340px;
-    }            
+    }
+
+    .calendar-container{
+
+        padding: 0em 4em 4em 4em !important;
+    } 
+
+    .section-calendar-header {
+
+        padding-left: 8em !important;
+        padding-right: 8em !important;
+    }           
 }
 
 @media screen and (min-width: 992px) {
@@ -498,6 +765,17 @@ img {
     #img-about {
 
         height: 110vh;
+    }
+
+    .calendar-container{
+
+        padding: 0em 6em 6em 6em !important;
+    }
+
+    .section-calendar-header {
+
+        padding-left: 10em !important;
+        padding-right: 10em !important;
     }
                    
 }

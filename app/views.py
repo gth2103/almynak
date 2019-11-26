@@ -9,7 +9,10 @@ from app.register import *
 from app.events import *
 from app.images import *
 
-@app.route('/', methods=['GET', 'POST'])
+brand_path = Home.query.all()[-1].brand
+
+menu = Home.query.all()[-1].menu
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -47,9 +50,9 @@ def register():
 @app.route('/upload-image/<file>', methods=['GET', 'POST'])
 def upload_image(file):
 
-    if request.method == "POST":
+    global brand_path
 
-        print(file)
+    if request.method == "POST":
 
         if file not in request.files:
 
@@ -57,7 +60,7 @@ def upload_image(file):
 
             return redirect(request.url)
 
-        image = request.files["brand-image"]
+        image = request.files[file]
 
         if image.filename == "":
 
@@ -73,39 +76,58 @@ def upload_image(file):
 
             filename  = secure_filename(image.filename)
 
+        full_path = os.path.join(app.config['IMAGE_UPLOADS_FULL'], filename)
+        rel_path = os.path.join(app.config['IMAGE_UPLOADS_REL'], filename)
 
-        image.save(os.path.join(app.config['IMAGE_UPLOADS'], filename))
+
+        image.save(full_path)
 
         print("Image saved.")
+
+        if file == 'brand-image':
+
+            home = Home(brand = rel_path)
+
+            db.session.add(home)
+            db.session.commit()
+
+            print(file  +  " added to db.")
+
+        brand_path = Home.query.all()[-1].brand
+
+        print(brand_path)
 
         return redirect(request.url)
 
     return redirect(url_for('home'))
 
-
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-	return render_template('home.html')
+
+    global brand_path
+    global  menu
+
+    return render_template('home.html', brand = brand_path, menu = menu)
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():
-	return render_template('about.html')
+	return render_template('about.html', brand = brand_path, menu = menu)
 
 @app.route('/members', methods=['GET', 'POST'])
 def members():
-    return render_template('members.html')
+    return render_template('members.html', brand = brand_path, menu = menu)
 
 @app.route('/calendar', methods=['GET', 'POST'])
 def calendar():
-    return render_template('calendar.html')
+    return render_template('calendar.html', brand = brand_path, menu = menu)
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html')
+    return render_template('contact.html', brand = brand_path, menu = menu)
 
 @app.route('/account', methods=['GET', 'POST'])
 def account():
-    return render_template('account.html')
+    return render_template('account.html', brand = brand_path, menu = menu)
 
 if __name__ == '__main__':
     app.run(debug = True)

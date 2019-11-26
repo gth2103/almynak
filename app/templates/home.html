@@ -5,15 +5,33 @@
                 <div id="img-home" class="col pl-0 d-block text-white text-center align-text-top">
                     <div class='row'>
                         <div class="col p-4 position-fixed banner">
-                            <span class="banner-title">
+                            {% if current_user.is_authenticated %}
+                            <div class="banner-title text-center" id="banner" contenteditable="True">
                                 Columbia University
-                                <br>
+                                <div>
                                 Black Pre-Professional Society
-                                <br>
-                            </span>
-                            <small class="banner-tagline mb-5">
+                                </div>
+                            </div>
+                            <button id="commit-banner" class="btn btn-light mb-4">
+                                    Update
+                            </button>
+                            <div class="banner-tagline text-center" id="tagline" contenteditable="True">
                                 Lorem ipsum dolor sit amet, mei percipit mnesarchum te, albucius phaedrum.
-                            </small>
+                            </div>
+                            <button id="commit-tagline" class="btn btn-light ml-2">
+                                    Update
+                                </button>
+                            {%  else %}
+                            <div class="banner-title text-center mb-2" id="banner">
+                                Columbia University
+                                <div>
+                                Black Pre-Professional Society
+                                </div>
+                            </div>
+                            <div class="banner-tagline text-center" id="tagline">
+                                Lorem ipsum dolor sit amet, mei percipit mnesarchum te, albucius phaedrum.
+                            </div>
+                            {% endif %}
                             <br>
                             <button id="enter" onclick="window.location.href='/about'" class="btn btn-dark mt-5 px-4 py-3">
                                 Enter
@@ -24,7 +42,11 @@
             </div>
             {% endblock %}
 
-{% block javascript %}
+            {% block javascript %}
+
+            <script type="text/javascript">
+                var brand = "{{brand}}"
+            </script>
 
 
-{% endblock %}
+            {% endblock %}
