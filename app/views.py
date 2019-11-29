@@ -101,6 +101,7 @@ def upload_image(file):
 
     return redirect(url_for('home'))
 
+@app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
 
