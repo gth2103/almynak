@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/GrantHewlett/Documents/columbia/fall_19/6998/hw/almynak/almynak_env"
+set -gx VIRTUAL_ENV "/home/almynak/almynak/almynak_env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

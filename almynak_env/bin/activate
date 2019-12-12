@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/GrantHewlett/Documents/columbia/fall_19/6998/hw/almynak/almynak_env"
+VIRTUAL_ENV="/home/almynak/almynak/almynak_env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

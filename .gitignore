@@ -1,4 +1,8 @@
-almynak_env/
+almynak.py
 __pycache__/
 app/__pycache__/
 app/__init__.pyc
+almynak.ini
+almynak.sock=
+wsgi.py
+almynak_env/
