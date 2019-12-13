@@ -1,4 +1,4 @@
-almynak_env/
 __pycache__/
 app/__pycache__/
 app/__init__.pyc
+app_env/

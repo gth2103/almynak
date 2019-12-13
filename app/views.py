@@ -101,6 +101,21 @@ def upload_image(file):
 
     return redirect(url_for('home'))
 
+@app.route('/update_text/<page>/<location>', methods=['GET', 'POST'])
+def update_text(page, location):
+
+    if request.method == 'POST':
+
+        if location == 'banner':
+
+            new_text = request.get_data().decode("utf-8")
+
+            print(new_text)
+
+            print(type(new_text))
+
+    return redirect(url_for(page))
+
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():

@@ -22,4 +22,5 @@ db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view == "login"
 
+from data.seed import *
 from app import views, models
