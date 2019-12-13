@@ -8,3 +8,5 @@ wtforms
 wtforms-components
 Flask-Mail
 pytz
+wheel
+uwsgi
