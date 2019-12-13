@@ -6,3 +6,4 @@ almynak.ini
 almynak.sock=
 wsgi.py
 app_env/
+almynak_env/
