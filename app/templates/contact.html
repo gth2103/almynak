@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
+            <div id="error_flash" class="alert_flash alert pt-4 text-center text-light font-weight-bold position-fixed bg-info overflow-auto">
+                <p>
+                    Ooops! Well this is embarrasing... 
+                </p>
+                <p>
+                    Something went wrong. Please try again.
+                </p>
+            </div>
+            <div id="Sent_flash" class="alert_flash alert pt-4 text-center text-light font-weight-bold position-fixed bg-info overflow-auto">
+                <p>
+                    Youur message was sent to CUBPS!
+                </p>
+            </div>
             <div class="row">
                 <div id="img-about" class="col pl-0 position-relative text-white text-center align-text-top">
                     <div class="p-4 position-fixed text-uppercase banner-about">
@@ -16,24 +29,24 @@
                         <div class="col section-contact-bar bg-light p-4">
                         </div>
                     </div>
-                    <div class="row px-5 pt-4">
-                        <div class="col-sm-2 col-lg-3">
+                    <div class="row px-2 pt-4">
+                        <div class="col-1 col-sm-2 col-lg-3">
                         </div>
-                        <div class="col-12 col-sm-8 col-lg-6 section-contact-header text-dark p-0 p-sm-3 p-lg-4">
+                        <div class="col-10 col-sm-8 col-lg-6 section-contact-header text-dark p-0 py-sm-3 py-lg-4">
                             Contact
                             <br>
                             <span class="label d-inline">
                                 Eum te melius tacimates. Inani affert feugiat sit in.
                             </span>
                         </div>
-                        <div class="col-sm-2 col-lg-3">
+                        <div class="col-1 col-sm-2 col-lg-3">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 col-lg-3">
+                        <div class="col-1 col-sm-2 col-lg-3">
                         </div>
-                        <div class="col-12 col-sm-8 col-lg-6 section-contact-body px-5 py-2">
-                            <form>
+                        <div class="col-10 col-sm-8 col-lg-6 section-contact-body px-2 py-2">
+                            <form id="mail-form">
                                 <div class="form-row">
                                     <label for="inputName" class="col p-2 text-dark">
                                         Name: &#42;
@@ -48,41 +61,41 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <label for="inputEmail" class="col col-form-label pt-4 px-2 text-dark">
+                                    <label for="email" class="col col-form-label pt-4 px-2 text-dark">
                                         Email Address: &#42;
                                     </label>
                                 </div>
                                 <div class="form-group form-row">
                                     <div class="col p-2">
-                                        <input id="email" type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+                                        <input id="email" type="email" class="form-control" placeholder="Email" required>
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <label for="inputSubject" class="col col-form-label p-2 text-dark">
+                                    <label for="subject" class="col col-form-label p-2 text-dark">
                                         Subject:
                                     </label>
                                 </div>
                                 <div class="form-row">
                                     <div class="col p-2">
-                                        <input id="subject" type="text" class="form-control" placeholder="" id="inputSubject">
+                                        <input id="subject" type="text" class="form-control" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <label for="inputMessage" class="col col-form-label pt-4 px-2 text-dark">
+                                    <label for="message" class="col col-form-label pt-4 px-2 text-dark">
                                         Message: &#42;
                                     </label>
                                 </div>
                                 <div class="form-row">
                                     <div class="col p-2">
-                                        <textarea class="form-control" id="inputMessage" rows="3" required></textarea>
+                                        <textarea class="form-control" id="message" rows="5" required></textarea>
                                     </div>
                                 </div>
-                                <button id="contact" type="submit" class="btn btn-secondary float-right my-4 mx-2">
+                                <button id="contact" type="button" class="btn btn-secondary float-right my-4 mx-2">
                                     Submit
                                 </button>
                             </form>    
                         </div>
-                        <div class="col-sm-2 col-lg-3">
+                        <div class="col-1 col-sm-2 col-lg-3">
                         </div>
                     </div>
                 </div>
@@ -92,7 +105,7 @@
 
 {% block javascript %}
 
-        <script type="text/javascript" src="{{ url_for('static', filename='calendar.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='contact.js') }}"></script>
 
 
 {% endblock %}

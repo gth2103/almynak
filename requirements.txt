@@ -10,3 +10,4 @@ Flask-Mail
 pytz
 wheel
 uwsgi
+itsdangerous

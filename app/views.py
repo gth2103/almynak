@@ -2,7 +2,8 @@ import os
 from flask import render_template, Response, request, jsonify, redirect, url_for, flash
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils  import secure_filename
-from app import app, db
+from flask_mail import Message
+from app import *
 from app.models import *
 from app.forms import *
 from app.register import *
@@ -124,6 +125,32 @@ def home():
     global  menu
 
     return render_template('home.html', brand = brand_path, menu = menu)
+
+@app.route('/send_mail', methods=['GET', 'POST'])
+def send_mail():
+
+    if request.method == 'POST':
+        
+        json_data = request.get_json()
+        fname = json_data["fname"]
+        lname = json_data["lname"]
+        email = json_data["email"]
+        subject = json_data["subject"]
+        message = json_data["message"]
+
+        recipient = app.config['MAIL_USERNAME']
+
+        print(recipient)
+
+        msg = Message('[CUBPS] New message: ' + subject, sender=email, recipients=[recipient])
+ 
+        msg.body = 'New message from ' + fname + ' ' + lname + '\n' + email + '\n\n' + message
+
+        mail.send(msg)
+
+        return jsonify(json_data = json_data)
+
+    return redirect(url_for('contact'))
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():

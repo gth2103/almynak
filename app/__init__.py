@@ -23,12 +23,12 @@ db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view == "login"
 
-app.config['MAIL_SERVER'] = 'localhost'
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = None
-app.config['MAIL_PASSWORD'] = None
+app.config['MAIL_USERNAME'] = 'gth2103@columbia.edu'
+app.config['MAIL_PASSWORD'] = 'SMJ*CV#s'
 
 mail = Mail(app)
 
