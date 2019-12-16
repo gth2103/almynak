@@ -7,6 +7,8 @@ from sqlalchemy.ext import mutable
 
 # @source https://www.michaelcho.me/article/json-field-type-in-sqlalchemy-flask-python
 
+#db.drop_all()
+
 class JsonEncodedDict(db.TypeDecorator):
 
     impl = db.Text
@@ -48,10 +50,15 @@ class Event(db.Model):
 
 class Home(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    brand = db.Column(db.String(255))
+    background = db.Column(db.String(255))
     banner = db.Column(db.String(255))
     tagline = db.Column(db.Text)
+
+class Base(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    brand = db.Column(db.String(255))
     menu = db.Column(JsonEncodedDict)
+    color = db.Column(db.String(10))
 
 @login_manager.user_loader
 def load_user(user_id):

@@ -7,13 +7,10 @@ var send_mail = function(new_email){
         contentType: "application/json; charset=utf-8",
         data : JSON.stringify(email_to_add),
         success: function(result){
-        	sent_flash()
-            setTimeout(function(){
-                window.location = "/contact"
-            }, 4000)
+            alert("Message sent.")
         },
         error: function(request, status, error){
-            error_flash()
+            alert("Ooops! Something went wrong. Please try again.")
             console.log("Error");
             console.log(request)
             console.log(status)
@@ -22,11 +19,28 @@ var send_mail = function(new_email){
     });
 }
 
-var send = function(){
+var eager_eval = function(form){
+
+    form.validate({
+
+        onkeyup: function(element, event) {
+            if (event.which === 9 && this.elementValue(element) === "" ) {
+                return;
+            } else {
+                this.element(element);
+            }
+        },
+        onfocusout: function(element) {
+            this.element(element); 
+        }
+    })
+}
+
+var contact = function(){
 
     var form = $('#mail-form')
 
-    form.validate()
+    eager_eval(form)
 
 	$('#contact').on('click', function(e){
 
@@ -40,40 +54,21 @@ var send = function(){
 
 		var new_email = jQuery.parseJSON( '{ "fname": "' + fname + '", "lname": "' + lname + '", "email": "' + email + '", "subject": "' + subject + '",  "message": "' + message + '" }')
 
-    send_mail(new_email)
-	})
+        if($('#mail-form').validate().numberOfInvalids() == 0){
+
+            if(confirm("Please verify that you are ready to send this message to CUBPS.")){
+
+                send_mail(new_email)
+            }
+        }
+        else{
+            alert("Invalid Input. Please check the highlighted fields.")
+        }
+    })
 }
-
-var error_flash = function(){
-
-    $('#error_flash').removeClass('alert_show')
-    $('#error_flash').addClass('alert_show')
-
-    var flash_timer = setTimeout(function(){
-        $('#error_flash').removeClass('alert_show')
-        $('#error_flash').addClass('alert_hide')
-        clearTimeout(flash_timer)
-    }, 3500)
-}
-
-var sent_flash = function(){
-
-    $('#sent_flash').removeClass('alert_show')
-    $('#sent_flash').addClass('alert_show')
-
-    var flash_timer = setTimeout(function(){
-        $('#sent_flash').removeClass('alert_show')
-        $('#sent_flash').addClass('alert_hide')
-        clearTimeout(flash_timer)
-    }, 3500)
-}
-
-
 
 $(document).ready(function(){
 
-    $('body').fadeIn(500);
-
-    send()
+    contact()
 
 });

@@ -9,10 +9,19 @@ from app.forms import *
 from app.register import *
 from app.events import *
 from app.images import *
+from app.account import *
 
-brand_path = Home.query.all()[-1].brand
+brand_path = Base.query.all()[-1].brand
 
-menu = Home.query.all()[-1].menu
+menu = Base.query.all()[-1].menu
+
+tagline = Home.query.all()[-1].tagline
+
+banner = Home.query.all()[-1].banner
+
+background_path = Home.query.all()[-1].background
+
+color_scheme = Base.query.all()[-1].color
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -32,6 +41,7 @@ def login():
     return render_template('login.html', title='Sign In', form=form)
 
 @app.route("/logout")
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
@@ -49,9 +59,11 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/upload-image/<file>', methods=['GET', 'POST'])
+@login_required
 def upload_image(file):
 
     global brand_path
+    global background_path
 
     if request.method == "POST":
 
@@ -87,23 +99,38 @@ def upload_image(file):
 
         if file == 'brand-image':
 
-            home = Home(brand = rel_path)
+            base = Base(brand = rel_path)
+
+            db.session.add(base)
+            db.session.commit()
+
+            print(file  +  " added to db.")
+
+            brand_path = Base.query.all()[-1].brand
+
+        elif file == 'background-image':
+
+            home = Home(background = rel_path)
 
             db.session.add(home)
             db.session.commit()
 
             print(file  +  " added to db.")
 
-        brand_path = Home.query.all()[-1].brand
+            background_path = Home.query.all()[-1].background
 
-        print(brand_path)
+            print(background_path)
 
         return redirect(request.url)
 
     return redirect(url_for('home'))
 
 @app.route('/update_text/<page>/<location>', methods=['GET', 'POST'])
+@login_required
 def update_text(page, location):
+
+    global banner
+    global tagline
 
     if request.method == 'POST':
 
@@ -111,20 +138,71 @@ def update_text(page, location):
 
             new_text = request.get_data().decode("utf-8")
 
-            print(new_text)
+            home = Home(banner = new_text)
 
-            print(type(new_text))
+            db.session.add(home)
+            db.session.commit()
+
+            print(new_text  +  " added to db.")
+
+            banner = Home.query.all()[-1].banner
+
+        if location == 'tagline':
+
+            new_text = request.get_data().decode("utf-8")
+
+            home = Home(tagline = new_text)
+
+            db.session.add(home)
+            db.session.commit()
+
+            print(new_text  +  " added to db.")
+
+            tagline = Home.query.all()[-1].tagline
 
     return redirect(url_for(page))
 
-@app.route('/')
-@app.route('/home', methods=['GET', 'POST'])
-def home():
+@app.route('/update_menu', methods=['GET', 'POST'])
+@login_required
+def update_menu():
 
-    global brand_path
-    global  menu
+    global menu
 
-    return render_template('home.html', brand = brand_path, menu = menu)
+    if request.method == 'POST':
+        
+        json_data = request.get_json()
+
+        base = Base(menu = json_data)
+
+        db.session.add(base)
+        db.session.commit()
+
+        print(json.dumps(json_data)  +  " added to db.")
+
+        menu = Base.query.all()[-1].menu
+
+    return jsonify(menu = menu)
+
+@app.route('/update_color', methods=['GET', 'POST'])
+@login_required
+def update_color():
+
+    global color_scheme
+
+    if request.method == 'POST':
+        
+        new_color = request.get_data().decode("utf-8")
+
+        base = Base(color = new_color)
+
+        db.session.add(base)
+        db.session.commit()
+
+        print(new_color  +  " added to db.")
+
+        color_scheme = Base.query.all()[-1].color
+
+    return color_scheme
 
 @app.route('/send_mail', methods=['GET', 'POST'])
 def send_mail():
@@ -140,8 +218,6 @@ def send_mail():
 
         recipient = app.config['MAIL_USERNAME']
 
-        print(recipient)
-
         msg = Message('[CUBPS] New message: ' + subject, sender=email, recipients=[recipient])
  
         msg.body = 'New message from ' + fname + ' ' + lname + '\n' + email + '\n\n' + message
@@ -152,25 +228,104 @@ def send_mail():
 
     return redirect(url_for('contact'))
 
+@app.route('/update_account', methods=['GET', 'POST'])
+@login_required
+def update_account():
+    accform = UpdateAccountForm()
+    if accform.validate_on_submit():
+
+        found_err, username_err, email_err = validate_account(current_user, accform.username.data, accform.email.data)
+        if found_err is True:
+            return jsonify(["error", accform.errors, {"username": username_err, "email": email_err}])
+
+        current_user.username = accform.username.data
+        current_user.email = accform.email.data
+
+        db.session.add(current_user)
+        db.session.commit()
+        return jsonify(["success", {"username": accform.username.data, "email": accform.email.data}])
+    return jsonify(["error", accform.errors, False])
+
+
+@app.route('/update_password', methods=['GET', 'POST'])
+@login_required
+def update_password():
+    pswform = UpdatePasswordForm()
+    if pswform.validate_on_submit():
+        update_psw(pswform, current_user)
+        return jsonify("Password updated.")
+    return jsonify(pswform.errors)
+
+
+@app.route('/delete_account', methods=['GET', 'POST'])
+@login_required
+def delete_account():
+    db.session.delete(current_user)
+    db.session.commit()
+    return redirect(url_for('login'))
+
+@app.route('/')
+@app.route('/home', methods=['GET', 'POST'])
+def home():
+
+    global brand_path
+    global menu
+    global tagline
+    global banner
+    global background_path
+    global color_scheme
+
+    return render_template('home.html', brand = brand_path, menu = menu, tagline = tagline, banner = banner, background = background_path, color_scheme = color_scheme)
+
 @app.route('/about', methods=['GET', 'POST'])
 def about():
-	return render_template('about.html', brand = brand_path, menu = menu)
+
+    global color_scheme
+    global brand_path
+    global menu
+
+    return render_template('about.html', brand = brand_path, menu = menu, color_scheme = color_scheme)
 
 @app.route('/members', methods=['GET', 'POST'])
 def members():
-    return render_template('members.html', brand = brand_path, menu = menu)
+
+    global color_scheme
+    global brand_path
+    global menu
+
+    return render_template('members.html', brand = brand_path, menu = menu, color_scheme = color_scheme)
 
 @app.route('/calendar', methods=['GET', 'POST'])
 def calendar():
-    return render_template('calendar.html', brand = brand_path, menu = menu)
+
+    global color_scheme
+    global brand_path
+    global menu
+
+    return render_template('calendar.html', brand = brand_path, menu = menu, color_scheme = color_scheme)
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html', brand = brand_path, menu = menu)
+
+    global color_scheme
+    global brand_path
+    global menu
+
+    return render_template('contact.html', brand = brand_path, menu = menu, color_scheme = color_scheme)
 
 @app.route('/account', methods=['GET', 'POST'])
+@login_required
 def account():
-    return render_template('account.html', brand = brand_path, menu = menu)
+
+    global color_scheme
+    global brand_path
+    global menu
+
+
+    accform = UpdateAccountForm()
+    pswform = UpdatePasswordForm()
+
+    return render_template('account.html', brand = brand_path, menu = menu, user = current_user, accform = accform, pswform = pswform, color_scheme = color_scheme)
 
 if __name__ == '__main__':
     app.run(debug = True)

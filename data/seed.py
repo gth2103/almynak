@@ -29,7 +29,7 @@ event4 = Event(id='4', title='example4', comment='', group='event-error', start_
 #db.session.add(event4)
 #db.session.commit()
 
-menu1 = {
+menu = {
 
 	'About us' : '/about',
 	'Members' : '/members',
@@ -37,7 +37,9 @@ menu1 = {
 	'Contact' : '/contact'
 }
 
-home1 = Home(brand = '/static/images/white_cubps_logo.png', banner = 'Columbia University<div>Black Pre-Professional Society</div>', tagline = 'Lorem ipsum dolor sit amet, mei percipit mnesarchum te, albucius phaedrum.', menu = menu1)
+home = Home(background = '/static/images/home.jpeg', banner = 'Columbia University<div>Black Pre-Professional Society</div>', tagline = 'Lorem ipsum dolor sit amet, mei percipit mnesarchum te, albucius phaedrum.')
+base = Base(color = 'black', brand = '/static/images/white_cubps_logo.png', menu = menu)
 
-db.session.add(home1)
+db.session.add(home)
+db.session.add(base)
 db.session.commit()

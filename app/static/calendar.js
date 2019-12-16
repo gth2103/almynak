@@ -1,13 +1,29 @@
-var today = function(){
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
-	$('#todayButton1').trigger('click')
+var date = function(){
+
+	var d = new Date();
+
+	$('#currentDate1').html(monthNames[d.getMonth()] + " " + d.getDate())
 }
+
+var date_correction = function(){
+
+	setTimeout(function(){
+
+		$('#todayButton1').trigger('click')	
+	}, 300)
+}
+
+
 
 
 $(document).ready(function(){
 
-    $('body').fadeIn(500);
-
-    today()
-
+	date()
+	
+	date_correction()
+    
 });

@@ -40,7 +40,7 @@
         <script type="text/javascript" src="{{ url_for('static', filename='base.js') }}"></script>
  
     </head>
-    <body class="bg-dark">
+    <body class="{{ 'bg-' + color_scheme}}">
         <div class="container">
             <div class="row">
                 <div class="col-12 pt-3 pb-3 pl-0 pr-4 title position-fixed">
@@ -53,7 +53,7 @@
                             <a class="nav-link dropdown-toggle d-inline" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <form class="dropdown-form d-inline-block" action="/upload-image/brand-image" method="POST" enctype="multipart/form-data">
+                                <form class="dropdown-form d-inline-block" action="/upload-image/brand-image" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Are you sure you want to upload this brand image? Changes will take effect immediately.');">
                                     <div class="form-group">
                                         <label class="form-label pl-1">
                                             Select&nbsp;Image:
@@ -65,7 +65,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <button id="upload" class="btn btn-light mt-2 float-right" type="submit">
+                                    <button id="upload-image" class="update btn btn-light mt-2 float-right" type="submit">
                                             Upload
                                     </button>
                                 </form>
@@ -73,7 +73,7 @@
                         </li>
                     </ul>
                     {% endif %}
-                    <ul id="menu" class="pl-3 pr-3 mr-0 mt-3  float-right">
+                    <ul id="menu" class="pl-3 pr-3 mr-0 mt-2 float-right">
                         {% for k, v in menu.items() %}
                         <li class="p-2 text-white font-weight-bold text-uppercase">
                             <a href="{{ v }}">
@@ -96,7 +96,7 @@
                             <a class="nav-link dropdown-toggle d-inline" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <form class="dropdown-form d-inline-block" action="/update-menu" method="POST" enctype="multipart/form-data">
+                                <form id="menu-form" class="dropdown-form d-inline-block" method="POST" enctype="multipart/form-data">
                                     {% for k, v in menu.items() %}
                                     <div class="form-group">
                                         <div class="row">
@@ -104,18 +104,18 @@
                                                 <label class="form-label">
                                                    {{k}}
                                                 </label>
-                                                <input type="text" class="form-control" placeholder="Name">
+                                                <input id="name{{ loop.index }}" type="text" class="form-control update" placeholder="Name" value="{{k}}" required>
                                             </div>
                                             <div class="col">
                                                 <label class="form-label">
                                                     {{v}}
                                                 </label>
-                                                <input type="text" class="form-control" placeholder="Path">
+                                                <input id="path{{ loop.index }}" type="text" class="form-control path update" placeholder="Path" value="{{v}}" required>
                                             </div>
                                         </div>
                                     </div>
                                     {% endfor %}
-                                    <button id="upload" class="btn btn-light mt-2 float-right" type="submit">
+                                    <button id="update-menu" class=" update btn btn-light mt-2 float-right" type="button">
                                             Update
                                     </button>
                                 </form>
@@ -130,11 +130,33 @@
 
             {% endblock %}
 
-            <div class="lift d-block row bg-dark base text-center">
+            <div class="lift d-block row {{ 'bg-' + color_scheme}} base text-center">
                 <div class="col">
                     <div class="row base-row position-absolute">
                         <div class="col base-col">
+                            {% if current_user.is_authenticated %}
+
+                            <img class="up-arrow-adjust" src="/static/images/up_arrow.png">
+
+                            {%  else %}
+
                             <img class="up-arrow" src="/static/images/up_arrow.png">
+
+                            {% endif %}
+
+                            {% if current_user.is_authenticated %}
+
+                            <span class="float-left">
+
+                                <label id="theme-title" class="text-uppercase text-secondary ml-2" for="theme-color"> 
+                                    Select theme
+                                </label>
+                                <br>
+                                <div id="theme-color" class="float-left">
+                                </div>
+                            </span>
+
+                            {% endif %}
                         </div>
                     </div>
                     <div class="row justify-content-center mr-3">
@@ -146,7 +168,7 @@
                                     <a class="nav-link dropdown-toggle social-media-toggle d-block" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <form class="dropdown-form d-inline-block" action="/update-menu" method="POST" enctype="multipart/form-data">
+                                        <form class="dropdown-form d-inline-block" action="/update-facebook" method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col">
@@ -157,7 +179,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button id="upload" class="btn btn-light mt-2 float-right" type="submit">
+                                            <button id="update-facebook" class="update btn btn-light mt-2 float-right" type="submit">
                                                 Update
                                             </button>
                                         </form>
@@ -174,7 +196,7 @@
                                     <a class="nav-link dropdown-toggle social-media-toggle d-block" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <form class="dropdown-form d-inline-block" action="/update-menu" method="POST" enctype="multipart/form-data">
+                                        <form class="dropdown-form d-inline-block" action="/update-twitter" method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col">
@@ -185,7 +207,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button id="upload" class="btn btn-light mt-2 float-right" type="submit">
+                                            <button id="update-twitter" class="update btn btn-light mt-2 float-right" type="submit">
                                                 Update
                                             </button>
                                         </form>
@@ -202,7 +224,7 @@
                                     <a class="nav-link dropdown-toggle social-media-toggle d-block" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <form class="dropdown-form d-inline-block" action="/update-menu" method="POST" enctype="multipart/form-data">
+                                        <form class="dropdown-form d-inline-block" action="/update-instagram" method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col">
@@ -213,7 +235,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button id="upload" class="btn btn-light mt-2 float-right" type="submit">
+                                            <button id="update-instagram" class="update btn btn-light mt-2 float-right" type="submit">
                                                 Update
                                             </button>
                                         </form>

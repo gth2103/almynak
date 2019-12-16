@@ -2,42 +2,65 @@
 {% block content %}
 
             <div class="row banner-row">
-                <div id="img-home" class="col pl-0 d-block text-white text-center align-text-top">
+                <div id="img-home" class="col pl-0 d-block text-white text-center align-text-top"><div id="home-overlay"></div>
                     <div class='row'>
                         <div class="col p-4 position-fixed banner">
+
                             {% if current_user.is_authenticated %}
                             <div class="banner-title text-center" id="banner" contenteditable="True">
-                                Columbia University
-                                <div>
-                                Black Pre-Professional Society
-                                </div>
                             </div>
                             <button id="commit-banner" class="btn btn-light mb-4">
-                                    Update
+                                Update
                             </button>
                             <div class="banner-tagline text-center" id="tagline" contenteditable="True">
-                                Lorem ipsum dolor sit amet, mei percipit mnesarchum te, albucius phaedrum.
                             </div>
                             <button id="commit-tagline" class="btn btn-light ml-2">
                                     Update
-                                </button>
+                            </button>
                             {%  else %}
                             <div class="banner-title text-center mb-2" id="banner">
-                                Columbia University
-                                <div>
-                                Black Pre-Professional Society
-                                </div>
+                                {{banner}}
                             </div>
                             <div class="banner-tagline text-center" id="tagline">
-                                Lorem ipsum dolor sit amet, mei percipit mnesarchum te, albucius phaedrum.
+                                {{tagline}}
                             </div>
                             {% endif %}
                             <br>
-                            <button id="enter" onclick="window.location.href='/about'" class="btn btn-dark mt-5 px-4 py-3">
+                            <button id="enter" onclick="window.location.href='/about'" class="btn {{ 'btn-' + color_scheme }} mt-5 mr-3 mr-sm-2 px-4 py-3">
                                 Enter
                             </button>
+
                         </div>
-                    </div>                    
+                    </div>
+                    {% if current_user.is_authenticated %}
+                    <div class='row'>
+                        <div class="col">
+                            <div class="nav-item dropdown position-fixed update-background">
+                                <a class="nav-link dropdown-toggle background-dropdown border-none d-inline" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img id="update-background" src="/static/images/wallpaper.png">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-base mt-5" aria-labelledby="navbarDropdown">
+                                    <form class="dropdown-form d-inline-block" action="/upload-image/background-image" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Are you sure you want to upload this background image? Changes will take effect immediately.');">
+                                        <div class="form-group">
+                                            <label class="form-label pl-1">
+                                                Select&nbsp;Image:
+                                            </label>
+                                            <div class="custom-file d-block">
+                                                <input type="file" class="custom-file-input" name="background-image" id="background-image">
+                                                <label class="custom-file-label label pt-2" for="background-image">
+                                                    Image...
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <button id="upload-image" class="update btn btn-light mt-2 float-right" type="submit">
+                                            Upload
+                                        </button>
+                                    </form>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    {% endif %}                   
                 </div>
             </div>
             {% endblock %}
@@ -45,7 +68,15 @@
             {% block javascript %}
 
             <script type="text/javascript">
-                var brand = "{{brand}}"
+                var background = "{{background}}"
+            </script>
+
+            <script type="text/javascript">
+                var banner = "{{banner}}"
+            </script>
+
+            <script type="text/javascript">
+                var tagline = "{{tagline}}"
             </script>
 
             <script type="text/javascript" src="{{ url_for('static', filename='home.js') }}"></script>

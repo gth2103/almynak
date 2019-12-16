@@ -10,16 +10,153 @@
                     
                 </div>
             </div>
-            <div class="lift content position-relative row bg-white text-center">
+            <div class="lift content position-relative row bg-white">
                 <div class="col">
                     <div class="row">
-                        <div class="col section-calendar-header text-center p-4">
-                            IMAGE UPLOAD TEST
+                        <div class="col section-account-bar bg-light p-4">
+                        </div>
+                    </div>
+                    <div class="row px-2 pt-4">
+                        <div class="col-1 col-sm-2 col-lg-3">
+                        </div>
+                        <div class="col-10 col-sm-8 col-lg-6 section-contact-header text-dark p-0 py-sm-3 py-lg-4">
+                            Update Account
+                            <br>
+                            <button id="delete-account" type="submit" class="btn btn-danger float-right p-1">
+
+                                Delete Account
+                            </button>
+                            <span class="label">
+                                Username: &nbsp;&nbsp;
+                            </span>
+                            <span id="username-value" class="account-detail">
+                                {{ user.username }} &nbsp;&nbsp;&nbsp;&nbsp;
+                            </span>
+                            <span class="d-inline-block">
+                                <span class="label">
+                                    Email: &nbsp;&nbsp; 
+                                </span>
+                                <span id="email-value" class="account-detail">
+                                    {{ user.email }}
+                                </span> 
+                            </span>
+                        </div>
+                        <div class="col-1 col-sm-2 col-lg-3">
                         </div>
                     </div>
                     <div class="row">
-                        <div id="uplaods" class="col section-calendar-header text-center p-4">
-                        
+                        <div class="col-1 col-sm-2 col-lg-3">
+                        </div>
+                        <div class="col-10 col-sm-8 col-lg-6 section-contact-body px-2 py-2">
+                            <form id="update-account-form">
+
+                                {{ accform.hidden_tag() }}
+                                <div class="form-row">
+                                    <label for="username" class="col p-2 text-dark">
+                                        Username: &#42;
+                                    </label>
+                                </div>
+                                <div class="form-group form-row">
+                                    <div class="col p-2 form-field">
+                                        {{ accform.username(value=user.username, id="username", type="text", class_="update form-control", placeholder="Username")}}
+
+                                        <div class='error-container'>
+
+                                            {% for error in accform.username.errors %}
+                                            <div class="error">
+                                                {{ error }}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <label for="email" class="col col-form-label pt-4 px-2 text-dark">
+                                        Email Address: &#42;
+                                    </label>
+                                </div>
+                                <div class="form-group form-row">
+                                    <div class="col p-2 form-field">
+
+                                        {{ accform.email(value=user.email, id="email", type="email", class="update email form-control", placeholder="Email") }}
+
+                                        <div class='error-container'>
+
+                                            {% for error in accform.email.errors %}
+                                            <div class="validation-error">
+
+                                                {{ error }}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ accform.submit(value="Update", id="update-account", type="button", class_="update btn btn-" + color_scheme + " my-4 mx-2") }}
+                            </form>
+                        </div>
+                        <div class="col-1 col-sm-2 col-lg-3">
+                        </div>
+                    </div>
+                    <div class="row px-2 pt-4">
+                        <div class="col-1 col-sm-2 col-lg-3">
+                        </div>
+                        <div class="col-10 col-sm-8 col-lg-6 section-contact-header text-dark p-0 py-sm-3 py-lg-4">
+                            Change Password 
+                        </div>
+                        <div class="col-1 col-sm-2 col-lg-3">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 col-sm-2 col-lg-3">
+                        </div>
+                        <div class="col-10 col-sm-8 col-lg-6 section-contact-body px-2 py-2">
+                            <form id="update-password-form">
+
+                                {{ pswform.hidden_tag() }}
+                                <div class="form-row">
+                                    <label for="username" class="col p-2 text-dark">
+                                        New Password: &#42;
+                                    </label>
+                                </div>
+                                <div class="form-group form-row">
+                                    <div class="col p-2 form-field">
+
+                                        {{ pswform.password(placeholder="new password", id="new", type="password", class="update form-control") }}
+                                        <div class='error-container'>
+
+                                            {% for error in pswform.password.errors %}
+                                            <div class="validation-error">
+                                            
+                                                {{ error }}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <label for="email" class="col col-form-label pt-4 px-2 text-dark">
+                                        Repeat Password: &#42;
+                                    </label>
+                                </div>
+                                <div class="form-group form-row">
+                                    <div class="col p-2 form-field">
+
+                                        {{ pswform.password_repeat(placeholder="repeat password", id="repeat", type="password", class="equal update form-control") }}
+                                        <div class='error-container'>
+
+                                            {% for error in pswform.password_repeat.errors %}
+                                            <div class="validation-error">
+
+                                                {{ error }}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ pswform.submit(value="Update", id="update-password", type="button", class_="update btn btn-" + color_scheme + " my-4 mx-2") }}
+                            </form>
+                        </div>
+                        <div class="col-1 col-sm-2 col-lg-3">
                         </div>
                     </div>
                 </div>
@@ -29,7 +166,10 @@
 
 {% block javascript %}
 
-        <script type="text/javascript" src="{{ url_for('static', filename='calendar.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='account.js') }}"></script>
 
+        <script type="text/javascript">
+                var user = "{{user|safe}}"
+        </script>
 
 {% endblock %}

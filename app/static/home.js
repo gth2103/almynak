@@ -18,7 +18,18 @@ var update_text = function(location, new_text){
     });
 }
 
-var commit_text = function(){
+var background_file_selected = function(){
+
+    $('#background-image').on('change', function(){
+
+        var file = $(this)[0].files[0].name;
+
+        $(this).next('label').text(file);
+    })
+}
+
+
+var set_text = function(){
 
 	$('#commit-banner').on('click', function(){
 
@@ -37,12 +48,32 @@ var commit_text = function(){
 	})
 }
 
+var get_background = function(){
+
+    $('#img-home').css('background-image', 'url(' + background + ')' )   
+}
+
+var get_banner = function(){
+
+    var banner_html = banner.replace(/&lt;/g, '<').replace(/&gt;/g, '>').split('&amp;nbsp;').join('')
+
+    $('#banner').html(banner_html)
+}
+
+var get_tagline = function(){
+
+    var tagline_html = tagline.replace(/&lt;/g, '<').replace(/&gt;/g, '>').split('&amp;nbsp;').join('')
+
+    $('#tagline').html(tagline_html)
+}
 
 
 $(document).ready(function(){
 
-    $('body').fadeIn(500);
-
-    commit_text()
+    set_text()
+    get_background()
+    get_banner()
+    get_tagline()
+    background_file_selected()
 
 });
