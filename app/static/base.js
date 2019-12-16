@@ -1,5 +1,12 @@
 var colors = ['dark', 'light', 'black']
 
+var upload_image = function(){
+
+    var page = location.href.split("/")[location.href.split("/").length - 1]
+
+    $('#upload-image-form').attr('action', '/upload-image/brand-image/' + page)
+}
+
 var fade_navbar = function(){
 
     $(window).scroll(function(){
@@ -236,4 +243,5 @@ $(document).ready(function(){
     theme_color()
     update_theme()
     quick_scroll_up()
+    upload_image()
 });

@@ -58,9 +58,9 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
-@app.route('/upload-image/<file>', methods=['GET', 'POST'])
+@app.route('/upload-image/<file>/<page>', methods=['GET', 'POST'])
 @login_required
-def upload_image(file):
+def upload_image(file, page):
 
     global brand_path
     global background_path
@@ -120,10 +120,8 @@ def upload_image(file):
             background_path = Home.query.all()[-1].background
 
             print(background_path)
-
-        return redirect(request.url)
-
-    return redirect(url_for('home'))
+            
+    return redirect(url_for(page))
 
 @app.route('/update_text/<page>/<location>', methods=['GET', 'POST'])
 @login_required

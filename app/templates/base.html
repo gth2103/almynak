@@ -38,7 +38,6 @@
         </script>
 
         <script type="text/javascript" src="{{ url_for('static', filename='base.js') }}"></script>
- 
     </head>
     <body class="{{ 'bg-' + color_scheme}}">
         <div class="container">
@@ -53,7 +52,7 @@
                             <a class="nav-link dropdown-toggle d-inline" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <form class="dropdown-form d-inline-block" action="/upload-image/brand-image" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Are you sure you want to upload this brand image? Changes will take effect immediately.');">
+                                <form id="upload-image-form" class="dropdown-form d-inline-block" action="" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Are you sure you want to upload this brand image? Changes will take effect immediately.');">
                                     <div class="form-group">
                                         <label class="form-label pl-1">
                                             Select&nbsp;Image:

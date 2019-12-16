@@ -6,7 +6,7 @@ var update_text = function(location, new_text){
         dataType : "html",
         data : text_to_add,
         success: function(result){
-        	alert("Text was submitted.")
+        	alert("Text updated.")
             console.log(result)
         },
         error: function(request, status, error){
