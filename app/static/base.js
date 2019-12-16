@@ -74,7 +74,7 @@ var update_theme_color = function(new_color){
         },
         error: function(request, status, error){
             alert("Ooops! Something went wrong. Please try again.")
-            console.log("Error");
+            console.log("Error")
             console.log(request)
             console.log(status)
             console.log(error)

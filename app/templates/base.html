@@ -74,11 +74,13 @@
                     {% endif %}
                     <ul id="menu" class="pl-3 pr-3 mr-0 mt-2 float-right">
                         {% for k, v in menu.items() %}
+                        {% if k != "" %}
                         <li class="p-2 text-white font-weight-bold text-uppercase">
                             <a href="{{ v }}">
                                 {{ k }}
                             </a>
                         </li>
+                        {% endif %}
                         {% endfor %}
                         {% if current_user.is_authenticated %}
                         <li class="p-2 text-white font-weight-bold text-uppercase">

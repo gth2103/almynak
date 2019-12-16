@@ -17,9 +17,6 @@ var date_correction = function(){
 	}, 300)
 }
 
-
-
-
 $(document).ready(function(){
 
 	date()

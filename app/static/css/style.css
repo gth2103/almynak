@@ -225,6 +225,11 @@ table {
     font-weight: 700;
 }
 
+.hide {
+
+    display: none;
+}
+
 .nav-link {
 
     outline: 0px solid transparent !important;
