@@ -249,19 +249,9 @@ def update_password():
 @login_required
 def delete_account():
 
-    group = Group.query.filter_by(id=current_user.group_id).first()
-
-    print(current_user.group_id)
-
     db.session.delete(current_user)
     db.session.commit()
-
-    users = group.users
-
-    if not users:
-        db.session.delete(group)
-        db.session.commit()
-
+    
     return redirect(url_for('login'))
 
 @app.route('/update_facebook', methods=['GET', 'POST'])
