@@ -147,7 +147,6 @@ table {
 
 #img-home {
     margin-top: -4px;
-    background-image: url("/static/images/home.jpeg");
     background-size: auto;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -223,6 +222,16 @@ table {
     font-size: 10pt;
     font-family: Galvji;
     font-weight: 700;
+}
+
+.upload-user-image {
+
+    width: 20px;
+}
+
+.remove-user {
+
+    width: 20px;
 }
 
 .hide {
@@ -320,7 +329,6 @@ table {
 
     bottom: 0vh;
     right: 0vw;
-    box-shadow: rgba(50, 50, 50, 0.4) 2px 2px 5px;
 }
 
 

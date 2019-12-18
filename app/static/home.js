@@ -10,6 +10,7 @@ var update_text = function(location, new_text){
             console.log(result)
         },
         error: function(request, status, error){
+            alert("Ooops! Something went wrong. Please try again.")
             console.log("Error");
             console.log(request)
             console.log(status)

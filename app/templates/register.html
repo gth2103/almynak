@@ -13,6 +13,18 @@
             <form method="post">
                 {{ form.hidden_tag() }}
                 <div class='form-field'>
+                    {{ form.group_id(placeholder=" Site ID") }}
+                    <br>
+                    <br>
+                    <label class="label">
+                        Leave empty to start a new site.
+                    </label>
+                    {% for error in form.group_id.errors %}
+                        <div class="validation-error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class='form-field'>
                     {{ form.username(placeholder=" Username") }}
                     {% for error in form.username.errors %}
                         <div class="validation-error">{{ error }}</div>

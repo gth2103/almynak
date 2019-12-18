@@ -39,11 +39,11 @@
 
         <script type="text/javascript" src="{{ url_for('static', filename='base.js') }}"></script>
     </head>
-    <body class="{{ 'bg-' + color_scheme}}">
+    <body class="{{ 'bg-' + theme_color}}">
         <div class="container">
             <div class="row">
                 <div class="col-12 pt-3 pb-3 pl-0 pr-4 title position-fixed">
-                    <a href="./home" class="pl-0 pl-sm-4 float-left">
+                    <a href="/home/{{group_id}}" class="pl-0 pl-sm-4 float-left">
                         <img id="logo" src="{{brand}}" alt="logo">
                     </a>
                     {% if current_user.is_authenticated %}
@@ -55,7 +55,7 @@
                                 <form id="upload-image-form" class="dropdown-form d-inline-block" action="" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Are you sure you want to upload this brand image? Changes will take effect immediately.');">
                                     <div class="form-group">
                                         <label class="form-label pl-1">
-                                            Select&nbsp;Image:
+                                            Select&nbsp;icon&nbsp;image:
                                         </label>
                                         <div class="custom-file d-block">
                                             <input type="file" class="custom-file-input" name="brand-image" id="brand-image">
@@ -76,7 +76,7 @@
                         {% for k, v in menu.items() %}
                         {% if k != "" %}
                         <li class="p-2 text-white font-weight-bold text-uppercase">
-                            <a href="{{ v }}">
+                            <a href="{{ v + '/' + group_id}}">
                                 {{ k }}
                             </a>
                         </li>
@@ -97,6 +97,9 @@
                             <a class="nav-link dropdown-toggle d-inline" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <label class="label mt-4 ml-4">
+                                     Paths:&nbsp;&nbsp; '/about'&nbsp;&nbsp;  '/members'&nbsp;&nbsp; '/calendar'&nbsp;&nbsp; '/contact' 
+                                </label>
                                 <form id="menu-form" class="dropdown-form d-inline-block" method="POST" enctype="multipart/form-data">
                                     {% for k, v in menu.items() %}
                                     <div class="form-group">
@@ -105,13 +108,13 @@
                                                 <label class="form-label">
                                                    {{k}}
                                                 </label>
-                                                <input id="name{{ loop.index }}" type="text" class="form-control update" placeholder="Name" value="{{k}}" required>
+                                                <input id="name{{ loop.index }}" type="text" class="form-control update" placeholder="Name" value="{{k}}">
                                             </div>
                                             <div class="col">
                                                 <label class="form-label">
                                                     {{v}}
                                                 </label>
-                                                <input id="path{{ loop.index }}" type="text" class="form-control path update" placeholder="Path" value="{{v}}" required>
+                                                <input id="path{{ loop.index }}" type="text" class="form-control path update" placeholder="Path" value="{{v}}">
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +134,7 @@
 
             {% endblock %}
 
-            <div class="lift d-block row {{ 'bg-' + color_scheme}} base text-center">
+            <div class="lift d-block row {{ 'bg-' + theme_color}} base text-center">
                 <div class="col">
                     <div class="row base-row position-absolute">
                         <div class="col base-col">
@@ -162,21 +165,21 @@
                     </div>
                     <div class="row justify-content-center mr-3">
                         <div class="col social-media-div">
-                            <a href="#">
+                            <a id="facebook_link" href="{{ facebook }}" onclick="return confirm('You are about to navigate away from the site to Facebook.com')">
                                 <img class="social-media" src="/static/images/facebook.png">
                                 {% if current_user.is_authenticated %}
                                 <div class="nav-item dropdown d-block">
                                     <a class="nav-link dropdown-toggle social-media-toggle d-block" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <form class="dropdown-form d-inline-block" action="/update-facebook" method="POST" enctype="multipart/form-data">
+                                        <form id="update-facebook-form" class="dropdown-form d-inline-block" method="POST" enctype="multipart/form-data" >
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col">
                                                         <label class="form-label">
                                                             Facebook:
                                                         </label>
-                                                        <input type="text" class="form-control" placeholder="http://www.facebook.com/example">
+                                                        <input id="facebook" type="url" class="form-control facebook" placeholder="http://www.facebook.com/example" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -190,21 +193,21 @@
                             </a>
                         </div>
                         <div class="col  social-media-div">
-                            <a href="#">
+                            <a id="twitter_link" href="{{ twitter }}" onclick="return confirm('You are about to navigate away from the site to Twitter.com')">
                                 <img class="social-media" src="/static/images/twitter.png">
                                 {% if current_user.is_authenticated %}
                                 <div class="nav-item dropdown d-block">
                                     <a class="nav-link dropdown-toggle social-media-toggle d-block" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <form class="dropdown-form d-inline-block" action="/update-twitter" method="POST" enctype="multipart/form-data">
+                                        <form id="update-twitter-form" class="dropdown-form d-inline-block"method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col">
                                                         <label class="form-label">
                                                             Twitter:
                                                         </label>
-                                                        <input type="text" class="form-control" placeholder="http://www.twitter.com/example">
+                                                        <input id="twitter" type="url" class="form-control twitter" placeholder="http://www.twitter.com/example" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -218,21 +221,21 @@
                             </a>
                         </div>
                         <div class="col social-media-div">
-                            <a href="#">
+                            <a id="instagram_link" href="{{ instagram }}" onclick="return confirm('You are about to navigate away from the site to Instagram.com')">
                                 <img class="social-media" src="/static/images/instagram.png">
                                 {% if current_user.is_authenticated %}
                                 <div class="nav-item dropdown d-block">
                                     <a class="nav-link dropdown-toggle social-media-toggle d-block" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <form class="dropdown-form d-inline-block" action="/update-instagram" method="POST" enctype="multipart/form-data">
+                                        <form id="update-instagram-form" class="dropdown-form d-inline-block" method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col">
                                                         <label class="form-label">
                                                             Instagram:
                                                         </label>
-                                                        <input type="text" class="form-control" placeholder="http://www.instagram.com/example">
+                                                        <input id="instagram" type="url" class="form-control instagram" placeholder="http://www.instagram.com/example" required>
                                                     </div>
                                                 </div>
                                             </div>

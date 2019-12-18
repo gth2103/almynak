@@ -1,4 +1,4 @@
-import os
+import os, re
 from flask import render_template, Response, request, jsonify, redirect, url_for, flash
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils  import secure_filename
@@ -10,23 +10,13 @@ from app.register import *
 from app.events import *
 from app.images import *
 from app.account import *
+from app.group import *
 
-brand_path = Base.query.all()[-1].brand
-
-menu = Base.query.all()[-1].menu
-
-tagline = Home.query.all()[-1].tagline
-
-banner = Home.query.all()[-1].banner
-
-background_path = Home.query.all()[-1].background
-
-color_scheme = Base.query.all()[-1].color
-
+@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('home', current_gid=current_user.group_id))
     form  = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -36,7 +26,7 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('home')
+            next_page = url_for('home', current_gid=user.group_id)
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
@@ -50,7 +40,7 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('home', current_gid=current_user.group_id))
     form  = RegistrationForm()
     if form.validate_on_submit():
         commit_registration(form)
@@ -58,12 +48,13 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
-@app.route('/upload-image/<file>/<page>', methods=['GET', 'POST'])
+@app.route('/upload_image/<file>/<page>', methods=['GET', 'POST'])
 @login_required
 def upload_image(file, page):
 
-    global brand_path
-    global background_path
+    tagline, banner, background_path = get_home_config(current_user.group_id)
+
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_user.group_id)
 
     if request.method == "POST":
 
@@ -71,7 +62,7 @@ def upload_image(file, page):
 
             print("No file selected.")
 
-            return redirect(request.url)
+            return redirect(url_for(page, current_gid=current_user.group_id))
 
         image = request.files[file]
 
@@ -79,7 +70,7 @@ def upload_image(file, page):
 
             print("Image must have a filename.")
 
-            return redirect(request.url)
+            return redirect(url_for(page, current_gid=current_user.group_id))
 
         if not allowed_images(image.filename):
 
@@ -99,85 +90,84 @@ def upload_image(file, page):
 
         if file == 'brand-image':
 
-            base = Base(brand = rel_path)
+            base = BaseConfig(brand = rel_path, menu = menu, color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id = current_user.group_id)
 
             db.session.add(base)
             db.session.commit()
 
             print(file  +  " added to db.")
 
-            brand_path = Base.query.all()[-1].brand
+            brand_path = BaseConfig.query.filter_by(group_id=current_user.group_id).all()[-1].brand
 
         elif file == 'background-image':
 
-            home = Home(background = rel_path)
+            home = Home(background = rel_path, banner = banner, tagline = tagline, group_id = current_user.group_id)
 
             db.session.add(home)
             db.session.commit()
 
             print(file  +  " added to db.")
 
-            background_path = Home.query.all()[-1].background
+            background_path = Home.query.filter_by(group_id=current_user.group_id).all()[-1].background
 
             print(background_path)
             
-    return redirect(url_for(page))
+    return redirect(url_for(page, current_gid=current_user.group_id))
 
 @app.route('/update_text/<page>/<location>', methods=['GET', 'POST'])
 @login_required
 def update_text(page, location):
 
-    global banner
-    global tagline
+    tagline, banner, background_path = get_home_config(current_user.group_id)
 
     if request.method == 'POST':
 
         if location == 'banner':
 
-            new_text = request.get_data().decode("utf-8")
+            new_banner = request.get_data().decode("utf-8")
 
-            home = Home(banner = new_text)
+            home = Home(background = background_path, banner = new_banner, tagline = tagline, group_id = current_user.group_id)
 
             db.session.add(home)
             db.session.commit()
 
-            print(new_text  +  " added to db.")
+            print(new_banner  +  " added to db.")
 
-            banner = Home.query.all()[-1].banner
+            banner = Home.query.filter_by(group_id=current_user.group_id).all()[-1].banner
 
         if location == 'tagline':
 
-            new_text = request.get_data().decode("utf-8")
+            new_tagline = request.get_data().decode("utf-8")
 
-            home = Home(tagline = new_text)
+            home = Home(background = background_path, banner = banner, tagline = new_tagline, group_id = current_user.group_id)
 
             db.session.add(home)
             db.session.commit()
 
-            print(new_text  +  " added to db.")
+            print(new_tagline  +  " added to db.")
 
-            tagline = Home.query.all()[-1].tagline
+            tagline = Home.query.filter_by(group_id=current_user.group_id).all()[-1].tagline
 
-    return redirect(url_for(page))
+    return redirect(url_for(page, current_gid=current_user.group_id))
 
 @app.route('/update_menu', methods=['GET', 'POST'])
 @login_required
 def update_menu():
 
-    global menu
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_user.group_id)
 
     if request.method == 'POST':
         
         json_data = request.get_json()
 
-        base = Base(menu = json_data)
+        base = BaseConfig(brand = brand_path, menu = json_data, color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id = current_user.group_id)
 
         db.session.add(base)
         db.session.commit()
 
         print(json.dumps(json_data)  +  " added to db.")
 
-        menu = Base.query.all()[-1].menu
+        menu = BaseConfig.query.filter_by(group_id=current_user.group_id).all()[-1].menu
 
     return jsonify(menu = menu)
 
@@ -185,25 +175,25 @@ def update_menu():
 @login_required
 def update_color():
 
-    global color_scheme
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_user.group_id)
 
     if request.method == 'POST':
         
         new_color = request.get_data().decode("utf-8")
 
-        base = Base(color = new_color)
+        base = BaseConfig(brand = brand_path, menu = menu, color = new_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id = current_user.group_id)
 
         db.session.add(base)
         db.session.commit()
 
         print(new_color  +  " added to db.")
 
-        color_scheme = Base.query.all()[-1].color
+        theme_color = BaseConfig.query.filter_by(group_id=current_user.group_id).all()[-1].color
 
-    return color_scheme
+    return theme_color
 
-@app.route('/send_mail', methods=['GET', 'POST'])
-def send_mail():
+@app.route('/send_mail/<current_gid>', methods=['GET', 'POST'])
+def send_mail(current_gid):
 
     if request.method == 'POST':
         
@@ -224,7 +214,7 @@ def send_mail():
 
         return jsonify(json_data = json_data)
 
-    return redirect(url_for('contact'))
+    return redirect(url_for('contact', current_gid=current_gid))
 
 @app.route('/update_account', methods=['GET', 'POST'])
 @login_required
@@ -258,72 +248,152 @@ def update_password():
 @app.route('/delete_account', methods=['GET', 'POST'])
 @login_required
 def delete_account():
+
+    group = Group.query.filter_by(id=current_user.group_id).first()
+
+    print(current_user.group_id)
+
     db.session.delete(current_user)
     db.session.commit()
+
+    users = group.users
+
+    if not users:
+        db.session.delete(group)
+        db.session.commit()
+
     return redirect(url_for('login'))
 
-@app.route('/')
-@app.route('/home', methods=['GET', 'POST'])
-def home():
+@app.route('/update_facebook', methods=['GET', 'POST'])
+@login_required
+def update_facebook():
 
-    global brand_path
-    global menu
-    global tagline
-    global banner
-    global background_path
-    global color_scheme
+    tagline, banner, background_path = get_home_config(current_user.group_id)
 
-    return render_template('home.html', brand = brand_path, menu = menu, tagline = tagline, banner = banner, background = background_path, color_scheme = color_scheme)
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_user.group_id)
 
-@app.route('/about', methods=['GET', 'POST'])
-def about():
+    if request.method == 'POST':
 
-    global color_scheme
-    global brand_path
-    global menu
+        url = request.get_data().decode("utf-8")
 
-    return render_template('about.html', brand = brand_path, menu = menu, color_scheme = color_scheme)
+        pattern = r'^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?www\.facebook\.com\/(?!.*\/).*$'
 
-@app.route('/members', methods=['GET', 'POST'])
-def members():
+        if bool(re.match(pattern, url)):
 
-    global color_scheme
-    global brand_path
-    global menu
+            base = BaseConfig(brand = brand_path, menu = menu, color = theme_color, facebook = url, twitter = twitter_url, instagram = instagram_url, group_id = current_user.group_id)
 
-    return render_template('members.html', brand = brand_path, menu = menu, color_scheme = color_scheme)
+            db.session.add(base)
+            db.session.commit()
 
-@app.route('/calendar', methods=['GET', 'POST'])
-def calendar():
+            print(url  +  " added to db.")
 
-    global color_scheme
-    global brand_path
-    global menu
+            facebook_url = BaseConfig.query.filter_by(group_id=current_user.group_id).all()[-1].facebook
 
-    return render_template('calendar.html', brand = brand_path, menu = menu, color_scheme = color_scheme)
+    return facebook_url
 
-@app.route('/contact', methods=['GET', 'POST'])
-def contact():
+@app.route('/update_twitter', methods=['GET', 'POST'])
+@login_required
+def update_twitter():
 
-    global color_scheme
-    global brand_path
-    global menu
+    tagline, banner, background_path = get_home_config(current_user.group_id)
 
-    return render_template('contact.html', brand = brand_path, menu = menu, color_scheme = color_scheme)
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_user.group_id)
+
+    if request.method == 'POST':
+
+        url = request.get_data().decode("utf-8")
+
+        pattern = r'^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?www\.twitter\.com\/(?!.*\/).*$'
+
+        if bool(re.match(pattern, url)):
+
+            base = BaseConfig(brand = brand_path, menu = menu, color = theme_color, facebook = facebook_url, twitter = url, instagram = instagram_url, group_id = current_user.group_id)
+
+            db.session.add(base)
+            db.session.commit()
+
+            print(url  +  " added to db.")
+
+            twitter_url = BaseConfig.query.filter_by(group_id=current_user.group_id).all()[-1].twitter
+
+    return twitter_url
+
+@app.route('/update_instagram', methods=['GET', 'POST'])
+@login_required
+def update_instagram():
+
+    tagline, banner, background_path = get_home_config(current_user.group_id)
+
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_user.group_id)
+
+    if request.method == 'POST':
+
+        url = request.get_data().decode("utf-8")
+
+        pattern = r'^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?www\.instagram\.com\/(?!.*\/).*$'
+
+        if bool(re.match(pattern, url)):
+
+            base = BaseConfig(brand = brand_path, menu = menu, color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = url, group_id = current_user.group_id)
+
+            db.session.add(base)
+            db.session.commit()
+
+            print(url  +  " added to db.")
+
+            instagram_url = BaseConfig.query.filter_by(group_id=current_user.group_id).all()[-1].instagram
+
+    return instagram_url
+
+
+@app.route('/<current_gid>')
+@app.route('/home/<current_gid>', methods=['GET', 'POST'])
+def home(current_gid):
+
+    tagline, banner, background_path = get_home_config(current_gid)
+
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_gid)
+
+    return render_template('home.html', brand = brand_path, menu = menu, tagline = tagline, banner = banner, background = background_path, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid)
+
+@app.route('/about/<current_gid>', methods=['GET', 'POST'])
+def about(current_gid):
+
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_gid)
+
+    return render_template('about.html', brand = brand_path, menu = menu, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid)
+
+@app.route('/members/<current_gid>', methods=['GET', 'POST'])
+def members(current_gid):
+
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_gid)
+
+    return render_template('members.html', brand = brand_path, menu = menu, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid)
+
+@app.route('/calendar/<current_gid>', methods=['GET', 'POST'])
+def calendar(current_gid):
+
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_gid)
+
+    return render_template('calendar.html', brand = brand_path, menu = menu, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid)
+
+@app.route('/contact/<current_gid>', methods=['GET', 'POST'])
+def contact(current_gid):
+
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_gid)
+
+    return render_template('contact.html', brand = brand_path, menu = menu, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid)
 
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
 
-    global color_scheme
-    global brand_path
-    global menu
-
+    brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_user.group_id)
 
     accform = UpdateAccountForm()
     pswform = UpdatePasswordForm()
 
-    return render_template('account.html', brand = brand_path, menu = menu, user = current_user, accform = accform, pswform = pswform, color_scheme = color_scheme)
+    return render_template('account.html', brand = brand_path, menu = menu, user = current_user, accform = accform, pswform = pswform, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=str(current_user.group_id))
 
 if __name__ == '__main__':
     app.run(debug = True)

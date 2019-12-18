@@ -33,5 +33,5 @@ app.config['MAIL_PASSWORD'] = 'SMJ*CV#s'
 
 mail = Mail(app)
 
-from data.seed import *
 from app import views, models
+from data.seed import *

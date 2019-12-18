@@ -1,10 +1,183 @@
 var colors = ['dark', 'light', 'black']
 
+var page = location.href.split("/")[location.href.split("/").length - 2]
+
+var facebook = new RegExp('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?www\.facebook\.com\/(?!.*\/).*$')
+var twitter = new RegExp('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?www\.twitter\.com\/(?!.*\/).*$')
+var instagram = new RegExp('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?www\.instagram\.com\/(?!.*\/).*$')
+
 var upload_image = function(){
 
-    var page = location.href.split("/")[location.href.split("/").length - 1]
+    $('#upload-image-form').attr('action', '/upload_image/brand-image/' + page)
+}
 
-    $('#upload-image-form').attr('action', '/upload-image/brand-image/' + page)
+var send_facebook = function(new_facebook){
+    var facebook_to_add = new_facebook
+    $.ajax({
+        type: "POST",
+        url: '/update_facebook',               
+        dataType : "text",
+        data : facebook_to_add,
+        success: function(result){
+            alert("Update successful.")
+            console.log(result)
+            $('#facebook_link').attr('href', result)
+        },
+        error: function(request, status, error){
+            alert("Ooops! Something went wrong. Please try again.")
+            console.log("Error");
+            console.log(request)
+            console.log(status)
+            console.log(error)
+        }
+    });
+}
+
+var add_facebook_validation = function(){
+
+    var facebook = new RegExp('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?www\.facebook\.com\/(?!.*\/).*$')
+
+    jQuery.validator.addMethod("facebook", function(value) {
+
+        var input = value.trim();
+    
+        return facebook.test(input);
+    }, "Please enter a valid Facebook url.");
+}
+
+var update_facebook = function(){
+
+    var form = $('#update-facebook-form')
+
+    form.validate()
+
+    $('#update-facebook').on('click', function(e){
+
+        e.preventDefault()
+
+        var new_facebook = $('#facebook').val().trim()
+
+        if(form.validate().numberOfInvalids() == 0){
+
+            if(confirm('Are you sure you want to link this Facebook account? Changes will take effect immediately.')){
+
+                send_facebook(new_facebook)
+            }   
+        }
+    })
+}
+
+
+var send_twitter = function(new_twitter){
+    var twitter_to_add = new_twitter
+    $.ajax({
+        type: "POST",
+        url: '/update_twitter',               
+        dataType : "text",
+        data : twitter_to_add,
+        success: function(result){
+            alert("Update successful.")
+            console.log(result)
+            $('#twitter_link').attr('href', result)
+        },
+        error: function(request, status, error){
+            alert("Ooops! Something went wrong. Please try again.")
+            console.log("Error");
+            console.log(request)
+            console.log(status)
+            console.log(error)
+        }
+    });
+}
+
+var add_twitter_validation = function(){
+
+    var twitter = new RegExp('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?www\.twitter\.com\/(?!.*\/).*$')
+
+    jQuery.validator.addMethod("twitter", function(value) {
+
+        var input = value.trim();
+    
+        return twitter.test(input);
+    }, "Please enter a valid Twitter url.");
+}
+
+var update_twitter = function(){
+
+    var form = $('#update-twitter-form')
+
+    form.validate()
+
+    $('#update-twitter').on('click', function(e){
+
+        e.preventDefault()
+
+        var new_twitter = $('#twitter').val().trim()
+
+        if(form.validate().numberOfInvalids() == 0){
+
+            if(confirm('Are you sure you want to link this Twitter account? Changes will take effect immediately.')){
+
+                send_twitter(new_twitter)
+            }   
+        }
+    })
+}
+
+var send_instagram = function(new_instagram){
+    var instagram_to_add = new_instagram
+    $.ajax({
+        type: "POST",
+        url: '/update_instagram',               
+        dataType : "text",
+        data : instagram_to_add,
+        success: function(result){
+            alert("Update successful.")
+            console.log(result)
+            $('#instagram_link').attr('href', result)
+        },
+        error: function(request, status, error){
+            alert("Ooops! Something went wrong. Please try again.")
+            console.log("Error");
+            console.log(request)
+            console.log(status)
+            console.log(error)
+        }
+    });
+}
+
+var add_instagram_validation = function(){
+
+    var instagram = new RegExp('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?www\.instagram\.com\/(?!.*\/).*$')
+
+    jQuery.validator.addMethod("instagram", function(value) {
+
+        var input = value.trim();
+
+        return instagram.test(input);
+    }, "Please enter a valid Instagram url.");
+}
+
+var update_instagram= function(){
+
+    var form = $('#update-instagram-form')
+
+    form.validate()
+
+    $('#update-instagram').on('click', function(e){
+
+        e.preventDefault()
+
+        var new_instagram = $('#instagram').val().trim()
+
+        if(form.validate().numberOfInvalids() == 0){
+
+            if(confirm('Are you sure you want to link this Instagram account? Changes will take effect immediately.')){
+
+                send_instagram(new_instagram)
+            }   
+        }
+    })
 }
 
 var fade_navbar = function(){
@@ -173,10 +346,10 @@ var add_path_validation = function(){
 
     jQuery.validator.addMethod("path", function(value) {
     
-        var path = ['/about', '/members', '/calendar', '/contact'];
+        var path = ['/about', '/members', '/calendar', '/contact', ''];
 
         return $.inArray(value, path) != -1;
-    }, "Path provided is invalid");
+    }, "Path provided is invalid. Choose from the options above.");
 }
 
 var update_menu = function(){
@@ -189,14 +362,49 @@ var update_menu = function(){
 
 		e.preventDefault()
 
-		var item1_name = $('#name1').val().trim();
-		var item1_path = $('#path1').val().trim();
-		var item2_name = $('#name2').val().trim();
-		var item2_path = $('#path2').val().trim();
-		var item3_name = $('#name3').val().trim();
-		var item3_path = $('#path3').val().trim();
-		var item4_name = $('#name4').val().trim();
-		var item4_path = $('#path4').val().trim();
+        if ($('#name1').val() !== undefined) {
+
+            var item1_name = $('#name1').val().trim();
+            var item1_path = $('#path1').val().trim();
+        }
+        else {
+
+            var item1_name = "";
+            var item1_path = "";
+        }
+        if ($('#name2').val() !== undefined) {
+
+            var item2_name = $('#name2').val().trim();
+            var item2_path = $('#path2').val().trim();
+
+        }
+        else {
+
+            var item2_name = "";
+            var item2_path = "";
+        }
+        if ($('#name3').val() !== undefined) {
+
+            var item3_name = $('#name3').val().trim();
+            var item3_path = $('#path3').val().trim();
+
+        }
+        else {
+
+            var item3_name = "";
+            var item3_path = "";
+        }
+        if ($('#name4').val() !== undefined) {
+
+            var item4_name = $('#name4').val().trim();
+            var item4_path = $('#path4').val().trim();
+
+        }
+        else {
+
+            var item4_name = "";
+            var item4_path = "";
+        }
 
 		var new_menu = jQuery.parseJSON( '{ "' + item1_name + '": "' + item1_path + '", "' + item2_name + '": "' + item2_path + '", "' + item3_name + '": "' + item3_path + '", "' + item4_name + '": "' + item4_path + '" }')
 
@@ -244,4 +452,12 @@ $(document).ready(function(){
     update_theme()
     quick_scroll_up()
     upload_image()
-});
+    add_facebook_validation()
+    add_twitter_validation()
+    add_instagram_validation()
+    update_facebook()
+    update_twitter()
+    update_instagram()
+
+})
+ 
