@@ -92,6 +92,7 @@ table {
     line-height: 9px;
     font-weight: 550;
     opacity: 0.9;
+    margin-top: 2rem!important;
 }
 
 #commit-banner {
@@ -157,6 +158,9 @@ table {
 #img-home {
     margin-top: -4px;
     background-size: auto;
+    -moz-background-size: auto;
+    -webkit-background-size: auto;
+    -o-background-size: auto;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center center;
@@ -857,16 +861,6 @@ cursor: pointer;
 
 @media screen and (max-width: 500px) {
 
-    #img-home {
-
-        margin-top: 0px;
-        height: 110vh;
-        background-size: 110vh;
-        -moz-background-size: 110vh;
-        -webkit-background-size: 110vh;
-        -o-background-size: 110vh;
-    }
-
     #img-about {
 
         margin-top: -16%;
@@ -877,6 +871,22 @@ cursor: pointer;
         -o-background-size: 120vw;
     }
 
+    .banner {
+
+        transform: scaleY(1);
+    }
+
+     .banner-row {
+
+        height: 87vh;
+    }
+
+
+    .banner-title {
+
+        font-size: 26pt;
+    }
+
 }
 
 @media screen and (max-width: 576px) {
@@ -885,6 +895,10 @@ cursor: pointer;
     #img-about {
 
         background-size: 110vw;
+    }
+
+    .banner-title {
+        font-size: 25pt;
     }
 
     .banner-about {
@@ -906,7 +920,7 @@ cursor: pointer;
 
         left: 0%;
         margin-left: 0px;
-        top: 25vh;
+        top: 50vh;
     }
 
     .lift {
@@ -932,7 +946,7 @@ cursor: pointer;
 
     .down-arrow{
 
-        margin-right: 0px;
+        margin-right: 18px;
     }
 
     .base-row {
