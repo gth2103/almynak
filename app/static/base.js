@@ -420,7 +420,7 @@ var update_menu = function(){
 
 var quick_scroll_up = function(){
 
-    $('.up-arrow-adjust').on('click', function(){
+    $('.down-arrow-adjust').on('click', function(){
 
         $('html, body').animate({
 
@@ -430,7 +430,7 @@ var quick_scroll_up = function(){
         return false;
     })
 
-    $('.up-arrow').on('click', function(){
+    $('.down-arrow').on('click', function(){
 
         $('html, body').animate({
 
