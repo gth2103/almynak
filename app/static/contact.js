@@ -2,7 +2,7 @@ var send_mail = function(new_email){
 	var email_to_add = new_email
     $.ajax({
         type: "POST",
-        url: '/send_mail',               
+        url: '/' + group_id + '/send_mail',               
         dataType : "json",
         contentType: "application/json; charset=utf-8",
         data : JSON.stringify(email_to_add),

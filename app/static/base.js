@@ -1,6 +1,6 @@
 var colors = ['dark', 'light', 'black']
 
-var page = location.href.split("/")[location.href.split("/").length - 2]
+var page = location.href.split("/")[location.href.split("/").length - 1]
 
 var facebook = new RegExp('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?www\.facebook\.com\/(?!.*\/).*$')
 var twitter = new RegExp('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?www\.twitter\.com\/(?!.*\/).*$')

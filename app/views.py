@@ -12,7 +12,7 @@ from app.images import *
 from app.account import *
 from app.group import *
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -192,7 +192,7 @@ def update_color():
 
     return theme_color
 
-@app.route('/send_mail/<current_gid>', methods=['GET', 'POST'])
+@app.route('/<current_gid>/send_mail', methods=['GET', 'POST'])
 def send_mail(current_gid):
 
     if request.method == 'POST':
@@ -204,7 +204,7 @@ def send_mail(current_gid):
         subject = json_data["subject"]
         message = json_data["message"]
 
-        recipient = app.config['MAIL_USERNAME']
+        recipient = Group.query.filter_by(id=current_gid).first().email
 
         msg = Message('[CUBPS] New message: ' + subject, sender=email, recipients=[recipient])
  
@@ -336,8 +336,8 @@ def update_instagram():
     return instagram_url
 
 
-@app.route('/<current_gid>')
-@app.route('/home/<current_gid>', methods=['GET', 'POST'])
+@app.route('/<current_gid>', methods=['GET', 'POST'])
+@app.route('/<current_gid>/home', methods=['GET', 'POST'])
 def home(current_gid):
 
     tagline, banner, background_path = get_home_config(current_gid)
@@ -346,28 +346,28 @@ def home(current_gid):
 
     return render_template('home.html', brand = brand_path, menu = menu, tagline = tagline, banner = banner, background = background_path, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid)
 
-@app.route('/about/<current_gid>', methods=['GET', 'POST'])
+@app.route('/<current_gid>/about', methods=['GET', 'POST'])
 def about(current_gid):
 
     brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_gid)
 
     return render_template('about.html', brand = brand_path, menu = menu, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid)
 
-@app.route('/members/<current_gid>', methods=['GET', 'POST'])
+@app.route('/<current_gid>/members', methods=['GET', 'POST'])
 def members(current_gid):
 
     brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_gid)
 
     return render_template('members.html', brand = brand_path, menu = menu, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid)
 
-@app.route('/calendar/<current_gid>', methods=['GET', 'POST'])
+@app.route('/<current_gid>/calendar', methods=['GET', 'POST'])
 def calendar(current_gid):
 
     brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_gid)
 
     return render_template('calendar.html', brand = brand_path, menu = menu, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid)
 
-@app.route('/contact/<current_gid>', methods=['GET', 'POST'])
+@app.route('/<current_gid>/contact', methods=['GET', 'POST'])
 def contact(current_gid):
 
     brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_gid)

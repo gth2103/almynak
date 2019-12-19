@@ -43,7 +43,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 pt-3 pb-3 pl-0 pr-4 title position-fixed">
-                    <a href="/home/{{group_id}}" class="pl-0 pl-sm-4 float-left">
+                    <a href="/{{group_id}}/home" class="pl-0 pl-sm-4 float-left">
                         <img id="logo" src="{{brand}}" alt="logo">
                     </a>
                     {% if current_user.is_authenticated %}
@@ -76,7 +76,7 @@
                         {% for k, v in menu.items() %}
                         {% if k != "" %}
                         <li class="p-2 text-white font-weight-bold text-uppercase">
-                            <a href="{{ v + '/' + group_id}}">
+                            <a href="{{ '/' + group_id + v }}">
                                 {{ k }}
                             </a>
                         </li>
