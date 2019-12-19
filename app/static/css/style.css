@@ -861,23 +861,19 @@ cursor: pointer;
 
         margin-top: 0px;
         height: 110vh;
-        background-size: 200%;
+        background-size: 200vh;
     }
 
     #img-about {
 
         margin-top: -16%;
         height: 50vh;
+        background-size: 110vw;
     }
 
 }
 
 @media screen and (max-width: 576px) {
-
-    #img-about {
-
-        background-size: 120vh;
-    }
 
 
     #img-about {
