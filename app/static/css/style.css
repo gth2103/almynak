@@ -571,13 +571,13 @@ cursor: pointer;
     z-index: 300;
 }
 
-.up-arrow{
+.down-arrow{
 
     height: 30px;
     top: 0px;
 }
 
-.up-arrow-adjust {
+.down-arrow-adjust {
 
     height: 30px;
     top: 0px;
@@ -864,12 +864,12 @@ cursor: pointer;
         padding-right: 1em !important;
     }
 
-    .up-arrow-adjust {
+    .down-arrow{-adjust {
 
         margin-right: 145px;
     }
 
-    .up-arrow {
+    .down-arrow{ {
 
         margin-right: 10px;
     } 
@@ -905,12 +905,12 @@ cursor: pointer;
         padding-right: 4em !important;
     }
 
-    .up-arrow-adjust {
+    .down-arrow-adjust {
 
         margin-right: 140px;
     }
 
-    .up-arrow {
+    .down-arrow {
 
         margin-right: 7px;
     }      
@@ -945,12 +945,12 @@ cursor: pointer;
         padding-right: 8em !important;
     }
 
-    .up-arrow-adjust {
+    .down-arrow-adjust {
 
         margin-right: 120px;
     }
 
-    .up-arrow {
+    .down-arrow {
 
         margin-right: -5px;
     }         
@@ -979,7 +979,7 @@ cursor: pointer;
         padding-right: 10em !important;
     }
 
-    .up-arrow {
+    .down-arrow {
 
         margin-right: -10px;
     } 
