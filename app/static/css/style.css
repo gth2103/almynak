@@ -362,7 +362,7 @@ table {
 .container {
 
     min-width: 100vw;
-    min-height: : 100vh;
+    min-height: 100vh;
 }
 
 .base {
@@ -381,14 +381,13 @@ table {
 
 .lift {
 
-    top: -10.5vh;
+    top: -12vh;
     z-index: 1000;
-    height:200px;
 }
 
 .base-col {
 
-    top: -10.5vh;
+    top: -12vh;
 }
 
 .base-row {
@@ -841,6 +840,11 @@ cursor: pointer;
     margin-right: 1.5rem;
 }
 
+.banner-row {
+
+    height: 111vh;
+}
+
 @media screen and (max-width: 500px) {
 
     #img-home {
@@ -853,21 +857,32 @@ cursor: pointer;
     #img-about {
 
         margin-top: -16%;
-        height: 116vh;
+        height: 50vh;
     }
 
 }
 
 @media screen and (max-width: 576px) {
 
+    #img-about {
+
+        height: 90vh;
+        background-size: 120vw;
+    }
+
     .banner-about {
 
         top: 55vh;
     }
 
-    #img-about {
+    .banner-row {
 
-        height: 90vh;
+        height: 99vh;
+    }
+
+    .about-row {
+
+        height: 25vh;
     }
 
     .banner {
