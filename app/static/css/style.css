@@ -393,6 +393,7 @@ table {
 
 .base-row {
 
+    position: absolute;
     width: 100%;
 }
 
@@ -835,6 +836,11 @@ cursor: pointer;
     border-color: #0d0f11 !important;
 }
 
+  .base-2 {
+
+        margin-right: 1.5rem;
+    }
+
 @media screen and (max-width: 576px) {
 
     .banner-about {
@@ -851,6 +857,12 @@ cursor: pointer;
 
         left: 0%;
         margin-left: 0px;
+        top: 25vh;
+    }
+
+    .lift {
+
+        top: 0vh;
     }
 
     .calendar-container{
@@ -864,16 +876,46 @@ cursor: pointer;
         padding-right: 1em !important;
     }
 
-    .down-arrow{-adjust {
+    .down-arrow-adjust {
 
         margin-right: 145px;
     }
 
-    .down-arrow{ {
+    .down-arrow{
 
-        margin-right: 10px;
-    } 
-}
+        margin-right: 0px;
+    }
+
+    .base-row {
+
+        position: relative;
+        margin-bottom: 2rem;
+        margin-left: .1rem;
+    }
+
+
+    .base-col {
+
+        top: 0vh;
+    }
+
+    #img-home {
+        margin-top: 0px;
+        height: 110vh;
+        transform: scaleY(1);
+    }
+
+    #img-about {
+        margin-top: -16%;
+        height: 116vh;
+        transform: scaleY(1);
+    }
+
+    .base-2 {
+
+        margin-top: 2rem;
+        margin-right: 1.5rem;
+    }
     
 
 @media screen and (min-width: 576px) {

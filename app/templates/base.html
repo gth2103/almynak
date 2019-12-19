@@ -136,7 +136,7 @@
 
             <div class="lift d-block row {{ 'bg-' + theme_color}} base text-center">
                 <div class="col">
-                    <div class="row base-row position-absolute">
+                    <div class="row base-row">
                         <div class="col base-col">
                             {% if current_user.is_authenticated %}
 
@@ -163,7 +163,7 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="row justify-content-center mr-3">
+                    <div class="row justify-content-center base-2">
                         <div class="col social-media-div">
                             <a id="facebook_link" href="{{ facebook }}" onclick="return confirm('You are about to navigate away from the site to Facebook.com')">
                                 <img class="social-media" src="/static/images/facebook.png">
