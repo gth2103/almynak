@@ -87,8 +87,9 @@ table {
 
 #menu {
 
-    padding-right: 1rem!important;
-    margin-top: .5rem!important;
+    padding-right: 3rem!important;
+    margin-top: 1rem!important;
+    padding-left: 3rem!important;
 }
 
 #enter {
@@ -880,7 +881,7 @@ cursor: pointer;
     #menu {
 
         padding-left: 0!important;
-        margin-top: 1rem!important;
+        padding-right: 0!important;
     }
 
     .banner {
