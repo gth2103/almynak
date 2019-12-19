@@ -85,6 +85,12 @@ table {
     height: 56px;
 }
 
+#menu {
+
+    padding-right: 1rem!important;
+    margin-top: .5rem!important;
+}
+
 #enter {
     
     border-radius: 0px;
@@ -869,6 +875,12 @@ cursor: pointer;
         -moz-background-size: 120vw;
         -webkit-background-size: 120vw;
         -o-background-size: 120vw;
+    }
+
+    #menu {
+
+        padding-left: 0!important;
+        margin-top: 1rem!important;
     }
 
     .banner {
