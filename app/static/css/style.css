@@ -866,8 +866,14 @@ cursor: pointer;
 
     #img-about {
 
+        background-size: 120vh;
+    }
+
+
+    #img-about {
+
         height: 90vh;
-        background-size: 120vw;
+        background-size: 90vh;
     }
 
     .banner-about {
