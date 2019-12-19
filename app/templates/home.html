@@ -17,6 +17,7 @@
                             <button id="commit-tagline" class="btn btn-light ml-2">
                                     Update
                             </button>
+                            <br>
                             {%  else %}
                             <div class="banner-title text-center mb-2" id="banner">
                                 {{banner}}
@@ -24,7 +25,6 @@
                             <div class="banner-tagline text-center" id="tagline">
                                 {{tagline}}
                             </div>
-                            <br>
                             {% endif %}
                             <button id="enter" onclick="window.location.href='/{{group_id}}/about'" class="btn {{ 'btn-' + theme_color }} mr-3 mr-sm-2 px-4 py-3">
                                 Enter
