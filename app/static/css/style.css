@@ -847,14 +847,13 @@ cursor: pointer;
 
         margin-top: 0px;
         height: 110vh;
-        transform: scale(2);
+        background-size: 200%;
     }
 
     #img-about {
 
         margin-top: -16%;
         height: 116vh;
-        background-size: contain;
     }
 
 }
