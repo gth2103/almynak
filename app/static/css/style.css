@@ -889,7 +889,13 @@ cursor: pointer;
 
     .banner_hr {
         
-        left: 55%;
+        left: 55.2%;
+        width: 130px;
+    }
+
+    .banner_hr_small {
+        
+        left: 53.5%;
         width: 130px;
     }
 
