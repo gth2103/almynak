@@ -903,7 +903,8 @@ cursor: pointer;
 
     .banner-about {
 
-        top: 55vh;
+        top: 35vh;
+        font-size: 20pt;
     }
 
     .banner-row {
@@ -913,7 +914,7 @@ cursor: pointer;
 
     .about-row {
 
-        height: 25vh;
+        height: 40vh;
     }
 
     .banner {
