@@ -193,7 +193,7 @@ table {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: top;
-    height: 120vh;
+    height: 110vh;
     color: white;
     font-size: 42px;
     transform: scaleY(0.9) translateY(-5%);
@@ -894,7 +894,7 @@ cursor: pointer;
 
     #img-about {
 
-        background-size: 110vw;
+        background-size: 200vw;
     }
 
     .banner-title {
@@ -903,7 +903,7 @@ cursor: pointer;
 
     .banner-about {
 
-        top: 35vh;
+        top: 30vh;
         font-size: 20pt;
     }
 
@@ -914,7 +914,7 @@ cursor: pointer;
 
     .about-row {
 
-        height: 40vh;
+        height: 36vh;
     }
 
     .banner {
@@ -979,7 +979,7 @@ cursor: pointer;
 
     #img-about {
 
-        height: 95vh;
+        height: 95vh !important;
     }  
 
     .banner {
@@ -1019,7 +1019,7 @@ cursor: pointer;
 
     #img-about {
 
-        height: 100vh;
+        height: 100vh !important;
     }
 
     .banner {
@@ -1059,7 +1059,7 @@ cursor: pointer;
 
     #img-about {
 
-        height: 110vh;
+        height: 110vh !important;
     }
 
     .calendar-container{
@@ -1089,8 +1089,7 @@ cursor: pointer;
 
     #img-about {
 
-        height: 110vh;
-        margin-top: -10%;
+        height: 110vh !important;
     }                
 }
 
@@ -1103,7 +1102,7 @@ cursor: pointer;
 
     #img-about {
 
-        height: 110vh;
+        height: 110vh !important;
     }               
 }
 
@@ -1116,7 +1115,7 @@ cursor: pointer;
 
     #img-about {
 
-        height: 110vh;
+        height: 110vh !important;
 
     }              
 }
