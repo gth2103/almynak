@@ -149,6 +149,11 @@ table {
     font-weight: 500;
 }
 
+#container {
+
+    height: 90vh !important;
+}
+
 #img-home {
     margin-top: -4px;
     background-size: auto;
@@ -845,6 +850,11 @@ cursor: pointer;
     height: 111vh;
 }
 
+#viewContainer1 {
+
+    height: 90vh !important;
+}
+
 @media screen and (max-width: 500px) {
 
     #img-home {
@@ -872,8 +882,7 @@ cursor: pointer;
 
     #img-about {
 
-        height: 90vh;
-        background-size: 90vh;
+        background-size: 110vw;
     }
 
     .banner-about {
