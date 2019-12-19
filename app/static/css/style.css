@@ -861,14 +861,14 @@ cursor: pointer;
 
         margin-top: 0px;
         height: 110vh;
-        background-size: 200vh;
+        background-size: auto 5000px;
     }
 
     #img-about {
 
         margin-top: -16%;
         height: 50vh;
-        background-size: 110vw;
+        background-size: 50vw;
     }
 
 }
