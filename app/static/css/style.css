@@ -854,7 +854,7 @@ cursor: pointer;
 
         margin-top: -16%;
         height: 116vh;
-        transform: scale(2);
+        background-size: contain;
     }
 
 }
