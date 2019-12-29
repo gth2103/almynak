@@ -970,11 +970,6 @@ cursor: pointer;
         margin-right: 145px;
     }
 
-    .down-arrow{
-
-        margin-right: 18px;
-    }
-
     .base-row {
 
         position: relative;
@@ -1035,11 +1030,6 @@ cursor: pointer;
         margin-right: 140px;
     }
 
-    .down-arrow {
-
-        margin-right: 7px;
-    }
-
     .date-top {
 
         font-size: 15pt !important;
@@ -1080,11 +1070,6 @@ cursor: pointer;
         margin-right: 120px;
     }
 
-    .down-arrow {
-
-        margin-right: -5px;
-    }
-
     .date-top {
 
         font-size: 20pt !important;
@@ -1112,13 +1097,7 @@ cursor: pointer;
 
         padding-left: 10em !important;
         padding-right: 10em !important;
-    }
-
-    .down-arrow {
-
-        margin-right: -10px;
-    } 
-                   
+    }              
 }
 
 @media screen and (min-width: 1200px) {
