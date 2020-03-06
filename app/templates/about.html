@@ -46,13 +46,17 @@
                                         <br>
                                         <img class="board-member-img p-2" src="{{member.image}}">
                                         <br>
+                                        {% if current_user.is_authenticated %}
                                         <img class="upload-user-image d-inline mr-3" src="/static/images/upload.png">
+                                        {% endif %}
                                         <button type="button" class="btn btn-light py-0 text-uppercase" data-toggle="modal" data-target="#exampleModal" data-name="{{member.name}}" data-title="{{member.title}}" data-about="{{member.about}}"> 
                                             <small> 
                                                 More
                                             </small>
                                         </button>
+                                        {% if current_user.is_authenticated %}
                                         <img class="remove-user d-inline ml-3" src="/static/images/trash.png">
+                                        {% endif %}
                                     </div> 
                                 </li>
                                 {% endif %}
@@ -81,13 +85,17 @@
                                         <br>
                                         <img class="board-member-img p-2" src="{{member.image}}">
                                         <br>
+                                        {% if current_user.is_authenticated %}
                                         <img class="upload-user-image d-inline mr-3" src="/static/images/upload.png">
+                                        {% endif %}
                                         <button type="button" class="btn btn-light py-0 text-uppercase" data-toggle="modal" data-target="#exampleModal" data-name="{{member.name}}" data-title="{{member.title}}" data-about="{{member.about}}"> 
                                             <small> 
                                                 More
                                             </small>
                                         </button>
+                                        {% if current_user.is_authenticated %}
                                         <img class="remove-user d-inline ml-3" src="/static/images/trash.png">
+                                        {% endif %}
                                     </div> 
                                 </li>
                                 {% endif %}
