@@ -244,6 +244,17 @@ def update_password():
         return jsonify("Password updated.")
     return jsonify(pswform.errors)
 
+@app.route('/remove_member/<member_id>', methods=['GET', 'POST'])
+@login_required
+def remove_member(member_id):
+
+    member = Member.query.filter_by(id=member_id).first()
+
+    db.session.delete(member)
+    db.session.commit()
+    
+    return redirect(url_for('about', current_gid=current_user.group_id))
+
 
 @app.route('/delete_account', methods=['GET', 'POST'])
 @login_required
@@ -353,8 +364,8 @@ def about(current_gid):
 
     members = Member.query.filter_by(group_id = current_gid).all()
 
-    print(members[0].name)
-    print(type(members[0].name))
+    #print(members[0].name)
+    #print(type(members[0].name))
 
     return render_template('about.html', brand = brand_path, menu = menu, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid, members = members)
 

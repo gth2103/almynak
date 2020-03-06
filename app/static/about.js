@@ -21,8 +21,43 @@ var modal_dynamic_select = function(){
     })
 };
 
+var remove_member  = function(){
+
+	$('.remove-user').on('click', function(){
+
+		var member_id =  $(this).data('member')
+
+		console.log(member_id)
+
+		remove(member_id)
+	})
+}
+
+var remove  = function(member_id){
+
+	var member_to_add = member_id
+
+    $.ajax({
+        type: "POST",
+        url: '/remove_member/' + member_id,               
+        dataType : "text",
+        success: function(result){
+            alert("Member removed successfully.")
+            window.location.reload();
+        },
+        error: function(request, status, error){
+            alert("Ooops! Something went wrong. Please try again.")
+            console.log("Error");
+            console.log(request)
+            console.log(status)
+            console.log(error)
+        }
+    });
+}
+
 $(document).ready(function(){
 
     modal_dynamic_select();
+    remove_member();
 
 });

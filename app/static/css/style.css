@@ -672,6 +672,13 @@ cursor: pointer;
     font-family: Galvji;
 }
 
+.member-icon:hover {
+
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+
 .btn-light {
 
     color: #535d67;
