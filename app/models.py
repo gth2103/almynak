@@ -47,7 +47,7 @@ class Group(db.Model):
     users = db.relationship('User', backref='group', lazy=True, cascade="all, delete")
     homepages = db.relationship('Home', backref='group', lazy=True, cascade="all, delete")
     base_configs = db.relationship('BaseConfig', backref='group', lazy=True, cascade="all, delete")
-
+    members = db.relationship('Member', backref='group', lazy=True, cascade="all, delete")
 
 class Home(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -56,6 +56,16 @@ class Home(db.Model):
     tagline = db.Column(db.Text, nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'), nullable=False)
 
+class Member(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    founder = db.Column(db.Boolean)
+    name = db.Column(db.String(120), nullable=False)
+    title = db.Column(db.String(120), nullable=False)
+    image = db.Column(db.String(255), nullable=False)
+    about = db.Column(db.Text, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    coffee = db.Column(db.String(120), nullable=False)
+    group_id = db.Column(db.Integer, db.ForeignKey('group.id'), nullable=False)
 
 class BaseConfig(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -8,8 +8,8 @@ var modal_dynamic_select = function(){
 
 	var roll = button.data('title')
 
-	var body = "Lorem ipsum dolor sit amet, mei ad modo suscipit, dolores mentitum et vel. Integre necessitatibus eos ut, diam signiferumque ut ius. At vis odio inani nominati, vis veniam democritum abhorreant id. Amet officiis vis id, has ad elaboraret scribentur. No per wisi graeco aliquid, corpora maluisset per in. Utinam percipit theophrastus per cu, pri munere nominati te."
-  
+	var body = button.data('about')
+	
 	// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   
 	// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.

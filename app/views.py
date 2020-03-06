@@ -351,7 +351,12 @@ def about(current_gid):
 
     brand_path, menu, theme_color, facebook_url, twitter_url, instagram_url = get_base_config(current_gid)
 
-    return render_template('about.html', brand = brand_path, menu = menu, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid)
+    members = Member.query.filter_by(group_id = current_gid).all()
+
+    print(members[0].name)
+    print(type(members[0].name))
+
+    return render_template('about.html', brand = brand_path, menu = menu, theme_color = theme_color, facebook = facebook_url, twitter = twitter_url, instagram = instagram_url, group_id=current_gid, members = members)
 
 @app.route('/<current_gid>/members', methods=['GET', 'POST'])
 def members(current_gid):

@@ -27,83 +27,71 @@
                     </div>
                     <div class="row">
                         <div class="col section text-center pt-5">
-                            BOARD
+                            FOUNDERS
                             <hr class="section_hr border mt-4 ">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col section-board text-center">
                             <ul id="board" class="p-0">
+                                {% for member in members %}
+                                {% if member.founder == True %}
                                 <li class="p-0">
                                     <div id="1" class="board-member d-inline-block text-center p-5">
-                                        Jane Doe
+                                        {{member.name}}
                                         <br>
                                         <span class="board-member-roll">
-                                            Co-Founder and CEO
+                                            {{member.title}}
                                         </span>
                                         <br>
-                                        <img class="board-member-img p-2" src="/static/images/board_1.jpeg">
+                                        <img class="board-member-img p-2" src="{{member.image}}">
                                         <br>
-                                        <button type="button" class="btn btn-light py-0 text-uppercase" data-toggle="modal" data-target="#exampleModal" data-name="Jane Doe" data-title="Co-Founder and CEO"> 
+                                        <img class="upload-user-image d-inline mr-3" src="/static/images/upload.png">
+                                        <button type="button" class="btn btn-light py-0 text-uppercase" data-toggle="modal" data-target="#exampleModal" data-name="{{member.name}}" data-title="{{member.title}}" data-about="{{member.about}}"> 
                                             <small> 
                                                 More
                                             </small>
                                         </button>
-                                        <img class="upload-user-image d-inline ml-4" src="/static/images/upload.png">
                                         <img class="remove-user d-inline ml-3" src="/static/images/trash.png">
                                     </div> 
                                 </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col section text-center pt-5">
+                            EXECUTIVE BOARD
+                            <hr class="section_hr border mt-4 ">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col section-board text-center">
+                            <ul id="board" class="p-0">
+                                {% for member in members %}
+                                {% if member.founder == False %}
                                 <li class="p-0">
-                                    <div id="2" class="board-member d-inline-block text-center p-5">
-                                        Rebecca Good
+                                    <div id="1" class="board-member d-inline-block text-center p-5">
+                                        {{member.name}}
                                         <br>
                                         <span class="board-member-roll">
-                                            Co-Founder and CEO
+                                            {{member.title}}
                                         </span>
                                         <br>
-                                        <img class="board-member-img p-2" src="/static/images/board_1.jpeg">
+                                        <img class="board-member-img p-2" src="{{member.image}}">
                                         <br>
-                                        <button type="button" class="btn btn-light py-0 text-uppercase" data-toggle="modal" data-target="#exampleModal" data-name="Rebecca Good" data-title="Co-Founder and CEO"> 
+                                        <img class="upload-user-image d-inline mr-3" src="/static/images/upload.png">
+                                        <button type="button" class="btn btn-light py-0 text-uppercase" data-toggle="modal" data-target="#exampleModal" data-name="{{member.name}}" data-title="{{member.title}}" data-about="{{member.about}}"> 
                                             <small> 
                                                 More
                                             </small>
                                         </button>
+                                        <img class="remove-user d-inline ml-3" src="/static/images/trash.png">
                                     </div> 
                                 </li>
-                                <li class="p-0">
-                                    <div id="2" class="board-member d-inline-block text-center p-5">
-                                        John Michael
-                                        <br>
-                                        <span class="board-member-roll">
-                                            COO
-                                        </span>
-                                        <br>
-                                        <img class="board-member-img p-2" src="/static/images/board_1.jpeg">
-                                        <br>
-                                        <button type="button" class="btn btn-light py-0 text-uppercase" data-toggle="modal" data-target="#exampleModal" data-name="John Michael" data-title="COO"> 
-                                            <small> 
-                                                More
-                                            </small>
-                                        </button>
-                                    </div> 
-                                </li>
-                                <li class="p-0">
-                                    <div id="2" class="board-member d-inline-block text-center p-5">
-                                        Shana Anthony
-                                        <br>
-                                        <span class="board-member-roll">
-                                            CFO
-                                        </span>
-                                        <br>
-                                        <img class="board-member-img p-2" src="/static/images/board_1.jpeg">
-                                        <br>
-                                        <button type="button" class="btn btn-light py-0 text-uppercase" data-toggle="modal" data-target="#exampleModal" data-name="Shana Anthony" data-title="CFO">
-                                            <small> 
-                                                More
-                                            </small>
-                                        </button>
-                                    </div> 
-                                </li>
+                                {% endif %}
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -126,12 +114,12 @@
                             </p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">
+                            <button type="button" class="btn btn-outline-primary" onclick="window.location.href = '{{members.email}}'">
                                 <small>
                                     CONTACT
                                 </small>
                             </button>
-                            <button type="button" class="btn btn-outline-primary">
+                            <button type="button" class="btn btn-outline-primary" onclick="window.location.href = '{{members.coffee}}'">
                                 <small>
                                     COFFEE CHAT
                                 </small>
