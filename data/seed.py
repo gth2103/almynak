@@ -6,7 +6,7 @@ from datetime import datetime
 
 admin = User(username='admin', email='admin@example.com', password_hash=generate_password_hash('admin'), group_id = 611102)
 
-db.session.add(admin)
+#db.session.add(admin)
 
 menu = {
 
@@ -41,4 +41,4 @@ member7 =  Member(founder = False, name = 'Collins Mokua', title = 'Chief Financ
 #db.session.add(member6)
 #db.session.add(member7)
 
-db.session.commit()
+#db.session.commit()
