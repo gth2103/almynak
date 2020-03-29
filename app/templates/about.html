@@ -86,7 +86,31 @@
                                         <img class="board-member-img p-2" src="{{member.image}}">
                                         <br>
                                         {% if current_user.is_authenticated %}
-                                        <img class="upload-user-image member-icon d-inline mr-3" src="/static/images/upload.png"data-member="{{member.id}}">
+
+
+
+
+
+
+
+
+
+                                        
+
+                                        <button type="button" id="upload-user-image" class="border-0 bg-transparent mr-3" data-toggle="modal" data-target="#exampleModal" data-name="{{member.name}}" data-title="{{member.title}}" data-about="">
+
+                                            <img class="upload-user-image member-icon d-inline" src="/static/images/upload.png"data-member="{{member.id}}" data-content="">
+                                            
+
+                                        </button>
+
+
+
+
+
+
+
+
                                         {% endif %}
                                         <button type="button" class="btn btn-light py-0 text-uppercase" data-toggle="modal" data-target="#exampleModal" data-name="{{member.name}}" data-title="{{member.title}}" data-about="{{member.about}}"> 
                                             <small> 

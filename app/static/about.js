@@ -27,9 +27,10 @@ var remove_member  = function(){
 
 		var member_id =  $(this).data('member')
 
-		console.log(member_id)
+		if(confirm("Are you sure you want to remove this member from the group? This operation cannot be undone." )) {
 
-		remove(member_id)
+			remove(member_id)
+		}
 	})
 }
 
@@ -55,9 +56,15 @@ var remove  = function(member_id){
     });
 }
 
+var set_upload_member_img  = function(){
+
+	$('#upload-user-image').attr('data-about', '<form class="dropdown-form d-inline-block" action="/upload_image/background-image/home" method="POST" enctype="multipart/form-data" onsubmit="return confirm(\'Are you sure you want to upload this background image? Changes will take effect immediately.\');"><div class="form-group"><label class="form-label pl-1">Select&nbsp;background&nbsp;image:</label><div class="custom-file d-block"><input type="file" class="custom-file-input" name="background-image" id="background-image"><label class="custom-file-label label pt-2" for="background-image">Image...</label></div></div><button id="upload-image" class="update btn btn-light mt-2 float-right" type="submit">Upload</button></form>')
+}
+
 $(document).ready(function(){
 
     modal_dynamic_select();
     remove_member();
+    set_upload_member_img();
 
 });
